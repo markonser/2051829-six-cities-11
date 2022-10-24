@@ -50,7 +50,7 @@ export default function Favorites(): JSX.Element {
                     </div>
                     <div className='favorites__image-wrapper place-card__image-wrapper'>
                       <a href='/'>
-                        <img className='place-card__image' src='img/apartment-small-03.jpg' width='150' height='110' alt='Place image' />
+                        <img className='place-card__image' src='img/apartment-small-03.jpg' width='150' height='110'/>
                       </a>
                     </div>
                     <div className='favorites__card-info place-card__info'>
@@ -82,7 +82,7 @@ export default function Favorites(): JSX.Element {
                   <article className='favorites__card place-card'>
                     <div className='favorites__image-wrapper place-card__image-wrapper'>
                       <a href='/'>
-                        <img className='place-card__image' src='img/room-small.jpg' width='150' height='110' alt='Place image' />
+                        <img className='place-card__image' src='img/room-small.jpg' width='150' height='110'/>
                       </a>
                     </div>
                     <div className='favorites__card-info place-card__info'>
@@ -125,7 +125,7 @@ export default function Favorites(): JSX.Element {
                   <article className='favorites__card place-card'>
                     <div className='favorites__image-wrapper place-card__image-wrapper'>
                       <a href='/'>
-                        <img className='place-card__image' src='img/apartment-small-04.jpg' width='150' height='110' alt='Place image' />
+                        <img className='place-card__image' src='img/apartment-small-04.jpg' width='150' height='110'/>
                       </a>
                     </div>
                     <div className='favorites__card-info place-card__info'>
