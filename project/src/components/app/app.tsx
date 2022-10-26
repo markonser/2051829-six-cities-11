@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
-import Page404 from '../errors/Page404';
+import PageNotFound from '../../pages/page-not-found/page-not-found';
 import Favorites from '../favorites/favorites';
 import Login from '../login/login';
 import PrivateRoute from '../private-route/private-route';
@@ -21,7 +21,7 @@ function App({ ...prop }): JSX.Element {
           </PrivateRoute>
         }
         />
-        <Route path='*' element={<Page404 />} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

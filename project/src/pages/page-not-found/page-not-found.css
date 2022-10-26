@@ -37,6 +37,10 @@
   display: inline-block;
 }
 
+.link_404 :hover {
+  cursor: pointer;
+}
+
 .contant_box_404 {
   margin-top: -50px;
 }

@@ -1,13 +1,15 @@
 import Card from '../../components/card/card';
+import { FullOffer } from '../../types/types';
 
-export default function MainPage({...prop}): JSX.Element {
+export default function MainPage({ ...prop }): JSX.Element {
+  const offers:FullOffer = prop.offers;
   return (
     <div className='page page--gray page--main' >
       <header className='header'>
         <div className='container'>
           <div className='header__wrapper'>
             <div className='header__left'>
-              <a className='header__logo-link header__logo-link--active'>
+              <a className='header__logo-link header__logo-link--active' href='/'>
                 <img className='header__logo' src='img/logo.svg' alt='6 cities logo' width='81' height='41' />
               </a>
             </div>
@@ -53,7 +55,7 @@ export default function MainPage({...prop}): JSX.Element {
                 </a>
               </li>
               <li className='locations__item'>
-                <a className='locations__item-link tabs__item tabs__item--active'>
+                <a className='locations__item-link tabs__item tabs__item--active' href='/'>
                   <span>Amsterdam</span>
                 </a>
               </li>
@@ -91,11 +93,7 @@ export default function MainPage({...prop}): JSX.Element {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {offers.map((offer)=>(<Card offer={offer} key={offer.id}/>))}
               </div>
             </section>
             <div className='cities__right-section'>
