@@ -1,8 +1,8 @@
-export type Settings = {
+export type SettingsType = {
   placesCount: number;
 };
 
-export type FullOffer = {
+export type FullOfferType = {
   bedrooms?: number;
   city?: {
     location?: {

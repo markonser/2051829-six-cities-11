@@ -1,23 +1,32 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
+import { FullOfferType, SettingsType } from '../../types/types';
 import Favorites from '../favorites/favorites';
 import Login from '../login/login';
 import PrivateRoute from '../private-route/private-route';
 import Property from '../property/property';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
-function App({ ...prop }): JSX.Element {
+function App({ placesCount, offers, ...props }: { placesCount: SettingsType; offers: FullOfferType[] }): JSX.Element {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path='/' element={<MainPage {...prop} />} />
+        <Route path='/' element={
+          <MainPage
+            placesCount={placesCount}
+            offers={offers}
+          />
+        }
+        />
         <Route path='/login' element={<Login />} />
-        <Route path='/offer/:id' element={<Property />} />
+        <Route path='/offer/:id' element={<Property offers={offers}/>} />
         <Route path='/favorites' element={
           <PrivateRoute>
-            <Favorites />
+            <Favorites
+              offers={offers}
+            />
           </PrivateRoute>
         }
         />
