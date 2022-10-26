@@ -1,8 +1,8 @@
-import Card from '../../components/card/card';
-import { FullOffer } from '../../types/types';
+// import Card from '../../components/card/card';
+// import { FullOffer } from '../../types/types';
 
 export default function MainPage({ ...prop }): JSX.Element {
-  const offers:FullOffer = prop.offers;
+  // const offers:FullOffer = prop.offers;
   return (
     <div className='page page--gray page--main' >
       <header className='header'>
@@ -93,7 +93,7 @@ export default function MainPage({ ...prop }): JSX.Element {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                {offers.map((offer)=>(<Card offer={offer} key={offer.id}/>))}
+                {/* {offers.map((offer)=>(<Card offer={offer} key={offer.id}/>))} */}
               </div>
             </section>
             <div className='cities__right-section'>
