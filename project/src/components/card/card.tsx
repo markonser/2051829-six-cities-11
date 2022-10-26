@@ -1,6 +1,6 @@
 
 export default function Card({...props}): JSX.Element {
-  const offer = {props};
+  // const offer = {props};
   return (
     <article className='cities__card place-card'>
       <div className='place-card__mark'>
