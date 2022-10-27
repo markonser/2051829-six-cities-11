@@ -1,12 +1,40 @@
-import { FullOfferType } from '../../types/types';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Offer } from '../../types/types';
 import Card from '../card/card';
 
-export function OffrsList({ offers }: { offers: FullOfferType[] }): JSX.Element {
+type Props = {
+  offers: Offer[];
+}
+
+export function OffersList({ offers }: Props) {
+  const [, setActiveOffer] = useState<number>();
+
+  function handleMouseEnter(offerId: number) {
+    setActiveOffer(offerId);
+  }
+  function handleMouseLeave() {
+    setActiveOffer(0);
+  }
 
   return (
     <>
       {
-        offers.map((offer) => (<Card offer={offer} key={offer.id} />))
+        offers.map((offer) => (
+          <Link
+            to={`/offer/${offer.id}`}
+            key={offer.id}
+            state={{ offer: offer }}
+          >;
+            <Card
+              key={offer.id}
+              offer={offer}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            // onClick={handleClick}
+            />
+          </Link>
+        ))
       }
     </>
   );

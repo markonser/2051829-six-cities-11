@@ -1,6 +1,6 @@
 import Header from '../header/header';
 
-export default function MainEmpty(): JSX.Element {
+export default function MainEmpty(){
   return (
     <div className='page page--gray page--main'>
       <Header />

@@ -1,4 +1,4 @@
-export default function PropertyNotLogged(): JSX.Element {
+export default function PropertyNotLogged(){
   return (
     <div className='page'>
       <header className='header'>

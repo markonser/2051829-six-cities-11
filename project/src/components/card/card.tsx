@@ -1,41 +1,30 @@
-import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
-import { FullOfferType } from '../../types/types';
+import { Offer } from '../../types/types';
 
-export default function Card({ offer }: { offer: FullOfferType }): JSX.Element {
-  const [isMouseHovered, setIsMouseHovered] = useState(false);
-  // const {id} = useParams();
-  // const tool = offer.find((el) => el.id === params.id);
-  // console.log(id);
+type Props = {
+  offer: Offer;
+  onMouseEnter: (offerId: number) => void;
+  onMouseLeave: () => void;
+}
 
-  function onHoverHandler() {
-    setIsMouseHovered(true);
+export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
 
+  function handleMouseEnter (){
+    onMouseEnter(offer.id);
   }
 
-  function onHoverOutHandler() {
-    setIsMouseHovered(false);
-
-  }
-
-  function onClickRedirectHandler() {
-    // <Link to={`/offer/${offer.id}`} />;
-    // console.log(offer.id);
+  function handleMpuseLeave(){
+    onMouseLeave();
   }
 
   return (
     <article className='cities__card place-card'
-      onMouseEnter={onHoverHandler}
-      onMouseLeave={onHoverOutHandler}
-      onClick={onClickRedirectHandler}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMpuseLeave}
     >
-      {offer.isPremium
-        ?
+      {offer.isPremium &&
         <div className='place-card__mark'>
-          <span>Premium {isMouseHovered}</span>
-        </div>
-        : ''}
+          <span>Premium</span>
+        </div>}
 
       <div className='cities__image-wrapper place-card__image-wrapper'>
         {/* <a href='/'> */}
@@ -62,7 +51,7 @@ export default function Card({ offer }: { offer: FullOfferType }): JSX.Element {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href='/'>{offer.title}</a>
+          <div>{offer.title}</div>
         </h2>
         <p className='place-card__type'>{offer.type}</p>
       </div>

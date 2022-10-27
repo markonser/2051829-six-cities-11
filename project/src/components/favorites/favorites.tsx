@@ -1,7 +1,11 @@
-import { FullOfferType } from '../../types/types';
+import { Offer } from '../../types/types';
 import Header from '../header/header';
 
-export default function Favorites({ offers }: { offers: FullOfferType[] }): JSX.Element {
+type Props = {
+  offers: Offer[];
+}
+
+export default function Favorites({ offers }: Props){
   return (
     <div className='page'>
       <Header />

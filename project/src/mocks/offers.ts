@@ -1,6 +1,6 @@
-import { FullOfferType } from '../types/types';
+import { Offer } from '../types/types';
 
-export const offers: FullOfferType[] = [
+export const offers: Offer[] = [
   {
     bedrooms: 3,
     city: {
@@ -13,17 +13,35 @@ export const offers: FullOfferType[] = [
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
-      'Heating'
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Towels',
+      'Heating',
+      'Coffee',
+      'machine',
+      'Baby',
+      'seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
     ],
     host: {
-      avatarUrl: 'img/1.png',
-      id: 3,
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 1,
       isPro: true,
-      name: 'Angelina'
+      name: 'Max'
     },
     id: 1,
     images: [
-      'img/apartment-01.jpg'
+      'img/apartment-01.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-02.jpg',
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
     ],
     isFavorite: true,
     isPremium: true,
@@ -51,17 +69,24 @@ export const offers: FullOfferType[] = [
     },
     description: 'mocks 2',
     goods: [
-      'Heating'
+      'Heating',
+      'machine',
+      'Towels',
+      'Heating',
+      'Coffee',
+      'machine',
     ],
     host: {
-      avatarUrl: 'img/1.png',
-      id: 3,
+      avatarUrl: 'img/avatar-angelina.jpg',
+      id: 2,
       isPro: true,
-      name: 'Angelina'
+      name: 'Lady'
     },
     id: 2,
     images: [
-      'img/apartment-02.jpg'
+      'img/apartment-01.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-02.jpg',
     ],
     isFavorite: true,
     isPremium: false,
@@ -89,17 +114,25 @@ export const offers: FullOfferType[] = [
     },
     description: 'mocks 3',
     goods: [
-      'Heating'
+      'Heating',
+      'seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 3,
     images: [
-      'img/apartment-03.jpg'
+      'img/apartment-01.jpg',
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
     ],
     isFavorite: true,
     isPremium: true,
@@ -127,17 +160,26 @@ export const offers: FullOfferType[] = [
     },
     description: 'mocks 4',
     goods: [
-      'Heating'
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-max.jpg',
       id: 4,
       isPro: true,
-      name: 'Angelina'
+      name: 'Max'
     },
     id: 4,
     images: [
-      'img/apartment-02.jpg'
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
     ],
     isFavorite: true,
     isPremium: true,

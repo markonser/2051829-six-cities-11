@@ -1,6 +1,6 @@
 import Header from '../header/header';
 
-export default function FavoritesEmpty(): JSX.Element {
+export default function FavoritesEmpty(){
   return (
     <div className='page page--favorites-empty'>
       <Header />

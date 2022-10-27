@@ -1,9 +1,14 @@
 
 import Header from '../../components/header/header';
-import { OffrsList } from '../../components/offers-list/offers-list';
-import { FullOfferType, SettingsType } from '../../types/types';
+import { OffersList } from '../../components/offers-list/offers-list';
+import { Offer, SettingsType } from '../../types/types';
 
-export default function MainPage({ placesCount, offers, ...props }: { placesCount: SettingsType; offers: FullOfferType[] }): JSX.Element {
+type Props = {
+  placesCount: SettingsType;
+  offers: Offer[];
+}
+
+export default function MainPage({ placesCount, offers}: Props){
 
   return (
     <div className='page page--gray page--main' >
@@ -68,7 +73,7 @@ export default function MainPage({ placesCount, offers, ...props }: { placesCoun
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <OffrsList offers={offers} />
+                <OffersList offers={offers} />
               </div>
             </section>
             <div className='cities__right-section'>
