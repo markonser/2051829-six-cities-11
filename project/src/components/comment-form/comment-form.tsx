@@ -1,12 +1,12 @@
-import { Comments, Offer } from '../../types/types';
-import { useState } from 'react';
+import { Comments } from '../../types/types';
+// import { useState } from 'react';
 type Props = {
   comments: Comments;
 }
 
 export default function CommentForm({ comments }: Props) {
 
-  const [newComment, setNewComment] = useState();
+  // const [newComment, setNewComment] = useState();
 
   return (
     <section className='property__reviews reviews'>
