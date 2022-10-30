@@ -1,15 +1,28 @@
 import { useParams } from 'react-router-dom';
-import { Offer } from '../../types/types';
+import { Comments, Offer } from '../../types/types';
+import CommentSendForm from '../comment-send-form/comment-send-form';
 import Header from '../header/header';
+import OfferComments from '../offer-comments/offer-comments';
+import { getUnicKey } from '../utils/utils';
 
 type Props = {
   offers: Offer[];
+  comments: Comments[];
 }
 
-export default function Property({ offers }: Props) {
+export default function Property({ offers, comments }: Props) {
+  const commentsOfOffer: Comments[] = [];
   const params = useParams();
-
   const offer = offers.find((el) => el.id === Number(params.id));
+
+  function getComments(arr: Comments[]) {
+    arr.forEach((el) => {
+      if (el.id === Number(params.id)) {
+        commentsOfOffer.push(el);
+      }
+    });
+  }
+  getComments(comments);
 
   return (
     <div className='page'>
@@ -19,7 +32,7 @@ export default function Property({ offers }: Props) {
           <div className='property__gallery-container container'>
             <div className='property__gallery'>
               {offer?.images?.map((img: string): JSX.Element => (
-                <div className='property__image-wrapper' key={img}>
+                <div className='property__image-wrapper' key={getUnicKey(offer.id)}>
                   <img className='property__image' src={img} alt='' />
                 </div>)
               )}
@@ -38,23 +51,25 @@ export default function Property({ offers }: Props) {
 
                 {offer?.description &&
                   <h1 className='property__name'>
-                    {offer?.description}
+                    {offer?.title}
                   </h1>}
 
-                <button className='property__bookmark-button button' type='button'>
+                <button className='property__bookmark-button property__bookmark-button--active button' type='button'>
                   <svg className='property__bookmark-icon' width='31' height='33'>
                     <use xlinkHref='#icon-bookmark'></use>
                   </svg>
                   <span className='visually-hidden'>To bookmarks</span>
                 </button>
               </div>
-              <div className='property__rating rating'>
-                <div className='property__stars rating__stars'>
-                  <span style={{ 'width': '80%' }}></span>
-                  <span className='visually-hidden'>Rating</span>
-                </div>
-                <span className='property__rating-value rating__value'>{offer?.rating}</span>
-              </div>
+
+              {offer?.rating &&
+                <div className='property__rating rating'>
+                  <div className='property__stars rating__stars'>
+                    <span style={{ 'width': `${offer.rating * 20}%` }}></span>
+                    <span className='visually-hidden'>Rating</span>
+                  </div>
+                  <span className='property__rating-value rating__value'>{offer?.rating}</span>
+                </div>}
               <ul className='property__features'>
                 <li className='property__feature property__feature--entire'>
                   {offer?.type}
@@ -75,7 +90,7 @@ export default function Property({ offers }: Props) {
                   <h2 className='property__inside-title'>What&apos;s inside</h2>
                   <ul className='property__inside-list'>
                     {offer.goods.map((el) => (
-                      <li className='property__inside-item' key={el}>
+                      <li className='property__inside-item' key={getUnicKey(offer.id)}>
                         {el}
                       </li>))}
                   </ul>
@@ -95,20 +110,22 @@ export default function Property({ offers }: Props) {
                         Pro
                       </span>}
                   </div>}
-
-                {/* комментарии из моков */}
                 <div className='property__description'>
                   <p className='property__text'>
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                    building is green and from 18th century.
+                    {offer?.description}
                   </p>
-                  <p className='property__text'>
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the
-                    bustle of the city comes to rest in this alley flowery and colorful.
-                  </p>
-                </div>
+                </div >
               </div>
-              {/* форма для добавления комментариев тут */}
+              <section className='property__reviews reviews'>
+                <div>
+                  <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{commentsOfOffer.length}</span></h2>
+                  {commentsOfOffer.map((comment) => (
+                    <OfferComments comment={comment} key={getUnicKey(comment.id)} />
+                  ))}
+                </div>
+                <CommentSendForm />
+                {/* форма для добавления комментариев тут */}
+              </section>
             </div>
           </div>
         </section>

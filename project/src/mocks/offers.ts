@@ -43,7 +43,7 @@ export const offers: Offer[] = [
       'img/studio-01.jpg.jpg',
       'img/apartment-01.jpg',
     ],
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
     location: {
       latitude: 52.35514938496378,
@@ -53,7 +53,7 @@ export const offers: Offer[] = [
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4.8,
+    rating: 1,
     title: 'mocks 1',
     type: 'Apartment'
   },
@@ -67,7 +67,7 @@ export const offers: Offer[] = [
       },
       name: 'Amsterdam'
     },
-    description: 'mocks 2',
+    description: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: [
       'Heating',
       'machine',
@@ -99,7 +99,7 @@ export const offers: Offer[] = [
     previewImage: 'img/room.jpg',
     price: 80,
     rating: 2,
-    title: 'mocks 2',
+    title: 'Заголовок объявления mocks 2',
     type: 'Room'
   },
   {
@@ -144,7 +144,7 @@ export const offers: Offer[] = [
     maxAdults: 2,
     previewImage: 'img/apartment-03.jpg',
     price: 80,
-    rating: 2,
+    rating: 3,
     title: 'mocks 3',
     type: 'Apartment'
   },
@@ -181,7 +181,7 @@ export const offers: Offer[] = [
       'img/studio-01.jpg.jpg',
       'img/apartment-01.jpg',
     ],
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
     location: {
       latitude: 52.35514938496012,
@@ -191,7 +191,7 @@ export const offers: Offer[] = [
     maxAdults: 2,
     previewImage: 'img/apartment-02.jpg',
     price: 80,
-    rating: 3,
+    rating: 4.5,
     title: 'mocks 4',
     type: 'Apartment'
   }

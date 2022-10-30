@@ -7,37 +7,50 @@ import Login from '../login/login';
 import PrivateRoute from '../private-route/private-route';
 import Property from '../property/property';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import { AppRoute } from '../../const/const';
+import { HelmetProvider } from 'react-helmet-async';
+import { comments } from '../../mocks/comments';
 
 type Props = {
   placesCount: SettingsType;
   offers: Offer[];
 }
 
-function App({ placesCount, offers }: Props){
+function App({ placesCount, offers }: Props) {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path='/' element={
-          <MainPage
-            placesCount={placesCount}
-            offers={offers}
-          />
-        }
-        />
-        <Route path='/login' element={<Login />} />
-        <Route path='/offer/:id' element={<Property offers={offers}/>} />
-        <Route path='/favorites' element={
-          <PrivateRoute>
-            <Favorites
+    <HelmetProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path={AppRoute.Main} element={
+            <MainPage
+              placesCount={placesCount}
               offers={offers}
             />
-          </PrivateRoute>
-        }
-        />
-        <Route path='*' element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
+          }
+          />
+          <Route path={AppRoute.Login} element={<Login />} />
+          <Route
+            path={AppRoute.Room}
+            element={
+              <Property
+                offers={offers}
+                comments={comments}
+              />
+            }
+          />
+          <Route path={AppRoute.Favorites} element={
+            <PrivateRoute>
+              <Favorites
+                offers={offers}
+              />
+            </PrivateRoute>
+          }
+          />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
