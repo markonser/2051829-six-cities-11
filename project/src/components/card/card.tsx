@@ -5,18 +5,18 @@ import { isFaforite } from '../utils/utils';
 type Props = {
   offer: Offer;
   onMouseEnter: (offerId: number) => void;
-  onMouseLeave: () => void;
+  // onMouseLeave: () => void;
 }
 
-export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
+export default function Card({ offer, onMouseEnter}: Props) {
 
   function handleMouseEnter() {
     onMouseEnter(offer.id);
   }
 
-  function handleMpuseLeave() {
-    onMouseLeave();
-  }
+  // function handleMpuseLeave() {
+  //   onMouseLeave();
+  // }
 
   return (
     <>
@@ -25,7 +25,6 @@ export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
       </Helmet>
       <article className='cities__card place-card'
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMpuseLeave}
       >
         {offer.isPremium &&
           <div className='place-card__mark'>

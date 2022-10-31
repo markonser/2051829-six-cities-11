@@ -14,9 +14,9 @@ export function OffersList({ offers }: Props) {
   function handleMouseEnter(offerId: number) {
     setActiveOffer(offerId);
   }
-  function handleMouseLeave() {
-    setActiveOffer(0);
-  }
+  // function handleMouseLeave() {
+  //   setActiveOffer(0);
+  // }
 
   return (
     <>
@@ -33,7 +33,7 @@ export function OffersList({ offers }: Props) {
               key={offer.id}
               offer={offer}
               onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              // onMouseLeave={handleMouseLeave}
             />
           </Link>
         ))

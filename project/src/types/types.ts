@@ -2,8 +2,13 @@ export type SettingsType = {
   placesCount: number;
 };
 
-export type Cities = {
-  cityName: string;
+export type CitiesType = {
+  paris? :[];
+  cologne? :[];
+  brussel? :[];
+  amsterdam? :[];
+  hamburg? :[];
+  dusseldorf? :[];
 }
 
 export type User = {

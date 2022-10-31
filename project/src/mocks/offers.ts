@@ -43,7 +43,7 @@ export const offers: Offer[] = [
       'img/studio-01.jpg.jpg',
       'img/apartment-01.jpg',
     ],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     location: {
       latitude: 52.35514938496378,
@@ -156,7 +156,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: 'Paris'
     },
     description: 'mocks 4',
     goods: [
@@ -181,7 +181,7 @@ export const offers: Offer[] = [
       'img/studio-01.jpg.jpg',
       'img/apartment-01.jpg',
     ],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     location: {
       latitude: 52.35514938496012,
