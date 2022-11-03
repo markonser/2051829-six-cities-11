@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import './page404.css';
+import './page-not-found.css';
 
-export default function Err404(): JSX.Element {
+export default function PageNotFound(){
   return (
     <section className="page_404">
       <div className="container">
@@ -22,7 +22,7 @@ export default function Err404(): JSX.Element {
                 <p>запрашиваемая страница не существует</p>
 
               </div>
-              <Link to='/' ><button className="link_404">Перейти на главную страницу</button></Link>
+              <Link to='/' ><span className="link_404">Перейти на главную страницу</span></Link>
             </div>
           </div>
         </div>

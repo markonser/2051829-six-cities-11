@@ -4,8 +4,8 @@ type PrivateRouteProps = {
   children: JSX.Element;
 };
 
-function PrivateRoute({children}: PrivateRouteProps): JSX.Element {
-  const hasAccess = false;
+function PrivateRoute({children}: PrivateRouteProps){
+  const hasAccess = true;
 
   return hasAccess ? children : <Navigate to={'/login'} />;
 }
