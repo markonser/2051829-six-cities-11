@@ -7,7 +7,7 @@ export enum AppRoute {
 }
 
 export const URL_MARKER_DEFAULT =
-  '../../public/img/pin.svg';
+  '/img/pin.svg';
 
 export const URL_MARKER_CURRENT =
-'../../public/img/pin-active.svg';
+'/img/pin-active.svg';
