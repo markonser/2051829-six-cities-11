@@ -1,7 +1,7 @@
-import { Comments } from '../../types/types';
+import { Comment } from '../../types/types';
 
 type Props = {
-  comment: Comments;
+  comment: Comment;
 }
 
 export default function OfferComments({ comment }: Props): JSX.Element {

@@ -1,4 +1,5 @@
 
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import { OffersList } from '../../components/offers-list/offers-list';
 import { Offer, SettingsType } from '../../types/types';
@@ -12,8 +13,10 @@ export default function MainPage({ placesCount, offers}: Props){
 
   return (
     <div className='page page--gray page--main' >
+      <Helmet>
+        <title>Main</title>
+      </Helmet>
       <Header />
-
       <main className='page__main page__main--index'>
         <h1 className='visually-hidden'>Cities</h1>
         <div className='tabs'>

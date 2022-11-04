@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { Offer } from '../../types/types';
 import Card from '../card/card';
 
@@ -11,12 +10,12 @@ type Props = {
 export function OffersList({ offers }: Props) {
   const [, setActiveOffer] = useState<number>();
 
-  function handleMouseEnter(offerId: number) {
+  const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
-  }
-  // function handleMouseLeave() {
-  //   setActiveOffer(0);
-  // }
+  };
+  const handleMouseLeave = () => {
+    setActiveOffer(0);
+  };
 
   return (
     <>
@@ -25,17 +24,12 @@ export function OffersList({ offers }: Props) {
       </Helmet>
       {
         offers.map((offer) => (
-          <Link
-            to={`/offer/${offer.id}`}
+          <Card
             key={offer.id}
-          >;
-            <Card
-              key={offer.id}
-              offer={offer}
-              onMouseEnter={handleMouseEnter}
-              // onMouseLeave={handleMouseLeave}
-            />
-          </Link>
+            offer={offer}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
         ))
       }
     </>

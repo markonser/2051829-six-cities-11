@@ -1,38 +1,35 @@
 import { useParams } from 'react-router-dom';
-import { Comments, Offer } from '../../types/types';
-import CommentSendForm from '../comment-send-form/comment-send-form';
-import Header from '../header/header';
-import OfferComments from '../offer-comments/offer-comments';
-import { getUnicKey } from '../utils/utils';
+import { Comment, Offer } from '../../types/types';
+import CommentSendForm from '../../components/comment-send-form/comment-send-form';
+import Header from '../../components/header/header';
+import OfferComments from '../../components/offer-comments/offer-comments';
+import { Helmet } from 'react-helmet-async';
 
 type Props = {
   offers: Offer[];
-  comments: Comments[];
+  comments: Comment[];
 }
 
 export default function Property({ offers, comments }: Props) {
-  const commentsOfOffer: Comments[] = [];
   const params = useParams();
   const offer = offers.find((el) => el.id === Number(params.id));
 
-  function getComments(arr: Comments[]) {
-    arr.forEach((el) => {
-      if (el.id === Number(params.id)) {
-        commentsOfOffer.push(el);
-      }
-    });
+  if (!offer) {
+    return <div>Данные не загружены</div>;
   }
-  getComments(comments);
 
   return (
     <div className='page'>
+      <Helmet>
+        <title>Подробности предложения </title>
+      </Helmet>
       <Header />
       <main className='page__main page__main--property'>
         <section className='property'>
           <div className='property__gallery-container container'>
             <div className='property__gallery'>
-              {offer?.images?.map((img: string): JSX.Element => (
-                <div className='property__image-wrapper' key={getUnicKey(offer.id)}>
+              {offer.images.map((img: string): JSX.Element => (
+                <div className='property__image-wrapper' key={offer.id * Math.random()}>
                   <img className='property__image' src={img} alt='' />
                 </div>)
               )}
@@ -42,16 +39,16 @@ export default function Property({ offers, comments }: Props) {
           <div className='property__container container'>
             <div className='property__wrapper'>
 
-              {offer?.isPremium &&
+              {offer.isPremium &&
                 <div className='property__mark'>
                   <span>Premium</span>
                 </div>}
 
               <div className='property__name-wrapper'>
 
-                {offer?.description &&
+                {offer.description &&
                   <h1 className='property__name'>
-                    {offer?.title}
+                    {offer.title}
                   </h1>}
 
                 <button className='property__bookmark-button property__bookmark-button--active button' type='button'>
@@ -62,42 +59,42 @@ export default function Property({ offers, comments }: Props) {
                 </button>
               </div>
 
-              {offer?.rating &&
+              {offer.rating &&
                 <div className='property__rating rating'>
                   <div className='property__stars rating__stars'>
                     <span style={{ 'width': `${offer.rating * 20}%` }}></span>
                     <span className='visually-hidden'>Rating</span>
                   </div>
-                  <span className='property__rating-value rating__value'>{offer?.rating}</span>
+                  <span className='property__rating-value rating__value'>{offer.rating}</span>
                 </div>}
               <ul className='property__features'>
                 <li className='property__feature property__feature--entire'>
-                  {offer?.type}
+                  {offer.type}
                 </li>
                 <li className='property__feature property__feature--bedrooms'>
-                  Bedrooms {offer?.bedrooms}
+                  Bedrooms {offer.bedrooms}
                 </li>
                 <li className='property__feature property__feature--adults'>
-                  Max 4 adults {offer?.maxAdults}
+                  Max 4 adults {offer.maxAdults}
                 </li>
               </ul>
               <div className='property__price'>
-                <b className='property__price-value'>&euro;{offer?.price}</b>
+                <b className='property__price-value'>&euro;{offer.price}</b>
                 <span className='property__price-text'>&nbsp;night</span>
               </div>
-              {offer?.goods &&
+              {offer.goods &&
                 <div className='property__inside'>
                   <h2 className='property__inside-title'>What&apos;s inside</h2>
                   <ul className='property__inside-list'>
                     {offer.goods.map((el) => (
-                      <li className='property__inside-item' key={getUnicKey(offer.id)}>
+                      <li className='property__inside-item' key={offer.id * Math.random()}>
                         {el}
                       </li>))}
                   </ul>
                 </div>}
               <div className='property__host'>
                 <h2 className='property__host-title'>Meet the host</h2>
-                {offer?.host &&
+                {offer.host &&
                   <div className='property__host-user user'>
                     <div className='property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper'>
                       <img className='property__avatar user__avatar' src={offer.host.avatarUrl} width='74' height='74' alt='Host avatar' />
@@ -112,15 +109,15 @@ export default function Property({ offers, comments }: Props) {
                   </div>}
                 <div className='property__description'>
                   <p className='property__text'>
-                    {offer?.description}
+                    {offer.description}
                   </p>
                 </div >
               </div>
               <section className='property__reviews reviews'>
                 <div>
-                  <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{commentsOfOffer.length}</span></h2>
-                  {commentsOfOffer.map((comment) => (
-                    <OfferComments comment={comment} key={getUnicKey(comment.id)} />
+                  <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{comments.length}</span></h2>
+                  {comments.map((comment) => (
+                    <OfferComments comment={comment} key={comment.id} />
                   ))}
                 </div>
                 <CommentSendForm />

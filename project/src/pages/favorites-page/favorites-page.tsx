@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/types';
-import Header from '../header/header';
+import Header from '../../components/header/header';
 
 type Props = {
   offers: Offer[];

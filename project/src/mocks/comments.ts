@@ -1,6 +1,6 @@
-import { Comments } from '../types/types';
+import { Comment } from '../types/types';
 
-export const comments : Comments[] = [
+export const comments : Comment[] = [
   {
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
     date: 'April 2019',
@@ -28,7 +28,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'dec 2022',
-    id: 2,
+    id: 3,
     rating: 2,
     user: {
       avatarUrl: 'img/avatar-max.jpg',
@@ -40,7 +40,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 1,
+    id: 4,
     rating: 4,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -52,7 +52,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 4,
+    id: 5,
     rating: 3,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -64,7 +64,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 3,
+    id: 6,
     rating: 3,
     user: {
       avatarUrl: 'img/avatar-max.jpg',
@@ -76,7 +76,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 4,
+    id: 7,
     rating: 4,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -88,7 +88,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 3,
+    id: 8,
     rating: 4,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -100,7 +100,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 1,
+    id: 9,
     rating: 3,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -112,7 +112,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 4,
+    id: 10,
     rating: 5,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -124,7 +124,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 1,
+    id: 11,
     rating: 1,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
@@ -136,7 +136,7 @@ export const comments : Comments[] = [
   {
     comment: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
     date: 'may 2019',
-    id: 1,
+    id: 12,
     rating: 2,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
