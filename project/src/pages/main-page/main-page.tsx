@@ -75,7 +75,9 @@ export default function MainPage({ offers }: Props) {
               <Map
                 offers={offers}
                 selectedPoint={activeOffer}
+                elementSelector={'cities__map map'}
               />
+
             </div>
           </div>
         </div>

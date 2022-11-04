@@ -2,8 +2,11 @@ import { useParams } from 'react-router-dom';
 import { Comment, Offer } from '../../types/types';
 import CommentSendForm from '../../components/comment-send-form/comment-send-form';
 import Header from '../../components/header/header';
-import OfferComments from '../../components/offer-comments/offer-comments';
+import RewiewsList from '../../components/reviews-list/reviews-list';
 import { Helmet } from 'react-helmet-async';
+import Map from '../../components/map/map';
+import { useState } from 'react';
+import Card from '../../components/card/card';
 
 type Props = {
   offers: Offer[];
@@ -14,6 +17,14 @@ export default function Property({ offers, comments }: Props) {
   const params = useParams();
   const offer = offers.find((el) => el.id === Number(params.id));
 
+  const [activeOffer, setActiveOffer] = useState<number | undefined>();
+
+  const handleMouseEnter = (offerId: number) => {
+    setActiveOffer(offerId);
+  };
+  const handleMouseLeave = () => {
+    setActiveOffer(undefined);
+  };
   if (!offer) {
     return <div>Данные не загружены</div>;
   }
@@ -117,86 +128,35 @@ export default function Property({ offers, comments }: Props) {
                 <div>
                   <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{comments.length}</span></h2>
                   {comments.map((comment) => (
-                    <OfferComments comment={comment} key={comment.id} />
+                    <RewiewsList comment={comment} key={comment.id} />
                   ))}
                 </div>
                 <CommentSendForm />
-                {/* форма для добавления комментариев тут */}
               </section>
             </div>
           </div>
         </section>
-        <section className='property__map map'></section>
+        <Map
+          offers={offers}
+          selectedPoint={activeOffer}
+          elementSelector={'property__map map'}
+        />
       </main>
       <div className='container'>
         <section className='near-places places'>
           <h2 className='near-places__title'>Other places in the neighbourhood</h2>
           <div className='near-places__list places__list'>
-            <article className='near-places__card place-card'>
-              <div className='near-places__image-wrapper place-card__image-wrapper'>
-                <a href='/'>
-                  <img className='place-card__image' src='img/room.jpg' width='260' height='200' alt='' />
-                </a>
-              </div>
-              <div className='place-card__info'>
-                <div className='place-card__price-wrapper'>
-                  <div className='place-card__price'>
-                    <b className='place-card__price-value'>&euro;80</b>
-                    <span className='place-card__price-text'>&#47;&nbsp;night</span>
-                  </div>
-                  <button className='place-card__bookmark-button place-card__bookmark-button--active button' type='button'>
-                    <svg className='place-card__bookmark-icon' width='18' height='19'>
-                      <use xlinkHref='#icon-bookmark'></use>
-                    </svg>
-                    <span className='visually-hidden'>In bookmarks</span>
-                  </button>
-                </div>
-                <div className='place-card__rating rating'>
-                  <div className='place-card__stars rating__stars'>
-                    <span style={{ 'width': '80%' }}></span>
-                    <span className='visually-hidden'>Rating</span>
-                  </div>
-                </div>
-                <h2 className='place-card__name'>
-                  <a href='/'>Wood and stone place</a>
-                </h2>
-                <p className='place-card__type'>Private room</p>
-              </div>
-            </article>
-
-            <article className='near-places__card place-card'>
-              <div className='near-places__image-wrapper place-card__image-wrapper'>
-                <a href='/'>
-                  <img className='place-card__image' src='img/apartment-02.jpg' width='260' height='200' alt='' />
-                </a>
-              </div>
-              <div className='place-card__info'>
-                <div className='place-card__price-wrapper'>
-                  <div className='place-card__price'>
-                    <b className='place-card__price-value'>&euro;132</b>
-                    <span className='place-card__price-text'>&#47;&nbsp;night</span>
-                  </div>
-                  <button className='place-card__bookmark-button button' type='button'>
-                    <svg className='place-card__bookmark-icon' width='18' height='19'>
-                      <use xlinkHref='#icon-bookmark'></use>
-                    </svg>
-                    <span className='visually-hidden'>To bookmarks</span>
-                  </button>
-                </div>
-                <div className='place-card__rating rating'>
-                  <div className='place-card__stars rating__stars'>
-                    <span style={{ 'width': '80%' }}></span>
-                    <span className='visually-hidden'>Rating</span>
-                  </div>
-                </div>
-                <h2 className='place-card__name'>
-                  <a href='/'>Canal View Prinsengracht</a>
-                </h2>
-                <p className='place-card__type'>Apartment</p>
-              </div>
-            </article>
-
-            <article className='near-places__card place-card'>
+            {
+              offers.map((item) => (
+                <Card
+                  key={item.id}
+                  offer={item}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                />
+              ))
+            }
+            {/* <article className='near-places__card place-card'>
               <div className='place-card__mark'>
                 <span>Premium</span>
               </div>
@@ -229,7 +189,7 @@ export default function Property({ offers, comments }: Props) {
                 </h2>
                 <p className='place-card__type'>Apartment</p>
               </div>
-            </article>
+            </article> */}
           </div>
         </section>
       </div>

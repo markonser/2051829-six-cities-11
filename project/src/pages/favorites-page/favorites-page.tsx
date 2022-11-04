@@ -2,14 +2,15 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/types';
 import Header from '../../components/header/header';
+import Card from '../../components/card/card';
 
 type Props = {
   offers: Offer[];
 }
 
 export default function Favorites({ offers }: Props) {
-  const allFavoriteOffers = offers.filter((it) => it.isFavorite);
-  const favoriteCities = Array.from(new Set(allFavoriteOffers.map((it) => it.city.name)));
+  const offersByCity = offers.filter((it) => it.isFavorite);
+  const favoriteCities = Array.from(new Set(offersByCity.map((it) => it.city.name)));
 
   return (
     <div className='page'>
@@ -36,7 +37,17 @@ export default function Favorites({ offers }: Props) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {allFavoriteOffers
+                    {
+                      offersByCity
+                        .filter((el) => el.city.name === it)
+                        .map((item) => (
+                          <Card
+                            key={item.id}
+                            offer={item}
+                          />
+                        ))
+                    }
+                    {/* {allFavoriteOffers
                       .filter((el) => el.city.name === it)
                       .map((offer) => (
                         <article className="favorites__card place-card" key={it}>
@@ -82,7 +93,7 @@ export default function Favorites({ offers }: Props) {
                             <p className="place-card__type">{offer.type}</p>
                           </div>
                         </article>
-                      ))}
+                      ))} */}
                   </div>
                 </li>
               ))}

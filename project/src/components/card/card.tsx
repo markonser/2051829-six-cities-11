@@ -1,36 +1,65 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Offer } from '../../types/types';
+import { AppRoute } from '../../const/const';
 
 type Props = {
   offer: Offer;
-  onMouseEnter: (offerId: number) => void;
-  onMouseLeave: () => void;
+  onMouseEnter?: (offerId: number) => void;
+  onMouseLeave?: () => void;
 }
 
 export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
+  const location = useLocation();
+
+  let articleClassName;
+  let divClassName;
+  let previewImageWidth;
+  let previewImageHeight;
+
+  switch (location.pathname) {
+    case AppRoute.Main:
+      articleClassName = 'cities__card place-card';
+      divClassName = 'cities__image-wrapper place-card__image-wrapper';
+      previewImageWidth = '260';
+      previewImageHeight = '200';
+      break;
+    case AppRoute.Favorites:
+      articleClassName = 'favorites__card place-card';
+      divClassName = 'favorites__image-wrapper place-card__image-wrapper';
+      previewImageWidth = '150';
+      previewImageHeight = '110';
+      break;
+    default:
+      articleClassName = 'near-places__card place-card';
+      divClassName = 'near-places__image-wrapper place-card__image-wrapper';
+      previewImageWidth = '260';
+      previewImageHeight = '200';
+  }
+
 
   function handleMouseEnter() {
-    onMouseEnter(offer.id);
+    if (onMouseEnter) {
+      onMouseEnter(offer.id);
+    }
   }
 
   return (
-    <Link
-      to={`/offer/${offer.id}`}
-      key={offer.id}
+    <article className={articleClassName}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
-      <article className='cities__card place-card'
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        {
-          offer.isPremium &&
-          <div className='place-card__mark'>
-            <span>Premium</span>
-          </div>
-        }
-        <div className='cities__image-wrapper place-card__image-wrapper'>
-          <img className='place-card__image' src={offer.previewImage} width='260' height='200' alt='' />
+      {
+        offer.isPremium &&
+        <div className='place-card__mark'>
+          <span>Premium</span>
         </div>
+      }
+      <div className={divClassName}>
+        <Link to={`/offer/${offer.id}`} key={offer.id} >
+          <img className='place-card__image' src={offer.previewImage} width={previewImageWidth} height={previewImageHeight} alt='' />
+        </Link>
+      </div>
+      <Link to={`/offer/${offer.id}`} key={offer.id} >
         <div className='place-card__info'>
           <div className='place-card__price-wrapper'>
             <div className='place-card__price'>
@@ -56,7 +85,7 @@ export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
           </h2>
           <p className='place-card__type'>{offer.type}</p>
         </div>
-      </article >
-    </Link >
+      </Link >
+    </article >
   );
 }
