@@ -1,55 +1,38 @@
 
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import Card from '../../components/card/card';
 import Header from '../../components/header/header';
-import { OffersList } from '../../components/offers-list/offers-list';
-import { Offer, SettingsType } from '../../types/types';
+import Map from '../../components/map/map';
+import { Offer } from '../../types/types';
 
 type Props = {
-  placesCount: SettingsType;
   offers: Offer[];
 }
 
-export default function MainPage({ placesCount, offers}: Props){
+export default function MainPage({ offers }: Props) {
+  const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
+  const handleMouseEnter = (offerId: number) => {
+    setActiveOffer(offerId);
+  };
+  const handleMouseLeave = () => {
+    setActiveOffer(undefined);
+  };
   return (
     <div className='page page--gray page--main' >
-      <Helmet>
-        <title>Main</title>
-      </Helmet>
       <Header />
+      <Helmet>
+        <title>Список предлоджений</title>
+      </Helmet>
       <main className='page__main page__main--index'>
         <h1 className='visually-hidden'>Cities</h1>
         <div className='tabs'>
           <section className='locations container'>
             <ul className='locations__list tabs__list'>
               <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className='locations__item'>
                 <a className='locations__item-link tabs__item tabs__item--active' href='/'>
                   <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Dusseldorf</span>
                 </a>
               </li>
             </ul>
@@ -59,7 +42,7 @@ export default function MainPage({ placesCount, offers}: Props){
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{placesCount.placesCount} places to stay in Amsterdam</b>
+              <b className='places__found'>{offers.length} places to stay in Amsterdam</b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>
@@ -76,11 +59,23 @@ export default function MainPage({ placesCount, offers}: Props){
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <OffersList offers={offers} />
+                {
+                  offers.map((offer) => (
+                    <Card
+                      key={offer.id}
+                      offer={offer}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    />
+                  ))
+                }
               </div>
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map'></section>
+              <Map
+                offers={offers}
+                selectedPoint={activeOffer}
+              />
             </div>
           </div>
         </div>

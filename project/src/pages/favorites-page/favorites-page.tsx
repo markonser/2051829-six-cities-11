@@ -9,7 +9,7 @@ type Props = {
 
 export default function Favorites({ offers }: Props) {
   const allFavoriteOffers = offers.filter((it) => it.isFavorite);
-  const favoriteCities = Array.from(new Set(allFavoriteOffers.map((it) => it?.city?.name)));
+  const favoriteCities = Array.from(new Set(allFavoriteOffers.map((it) => it.city.name)));
 
   return (
     <div className='page'>
@@ -37,7 +37,7 @@ export default function Favorites({ offers }: Props) {
                   </div>
                   <div className="favorites__places">
                     {allFavoriteOffers
-                      .filter((el) => el?.city?.name === it)
+                      .filter((el) => el.city.name === it)
                       .map((offer) => (
                         <article className="favorites__card place-card" key={it}>
                           {offer.isPremium &&

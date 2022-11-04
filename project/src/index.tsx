@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { comments } from './mocks/comments';
 import { offers } from './mocks/offers';
 
-import { Offer, SettingsType } from './types/types';
+import { Comment, Offer} from './types/types';
 
 
 const root = ReactDOM.createRoot(
@@ -11,16 +12,13 @@ const root = ReactDOM.createRoot(
 );
 
 const mockOffers: Offer[] = offers;
-
-const Settings : SettingsType = {
-  placesCount: 654
-} as const;
+const mockCommets: Comment[] = comments;
 
 root.render(
   <React.StrictMode>
     <App
-      placesCount={Settings}
       offers={mockOffers}
+      comments={mockCommets}
     />
   </React.StrictMode>,
 );

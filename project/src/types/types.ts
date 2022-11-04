@@ -1,6 +1,21 @@
-export type SettingsType = {
-  placesCount: number;
-};
+export type CityLocation = {
+  city: {
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+    name: string;
+  };
+}
+
+export type OfferLocation = {
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+}
 
 export type User = {
   avatarUrl: string;
