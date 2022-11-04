@@ -15,11 +15,11 @@ const mockOffers: Offer[] = offers;
 const mockCommets: Comment[] = comments;
 
 root.render(
-  // <React.StrictMode>
-  <App
-    offers={mockOffers}
-    comments={mockCommets}
-  />
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <App
+      offers={mockOffers}
+      comments={mockCommets}
+    />
+  </React.StrictMode>,
 );
 
