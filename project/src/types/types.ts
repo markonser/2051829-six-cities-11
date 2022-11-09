@@ -1,14 +1,20 @@
-export type SettingsType = {
-  placesCount: number;
-};
+export type CityLocation = {
+  city: {
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+    name: string;
+  };
+}
 
-export type CitiesType = {
-  paris? :[];
-  cologne? :[];
-  brussel? :[];
-  amsterdam? :[];
-  hamburg? :[];
-  dusseldorf? :[];
+export type OfferLocation = {
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
 }
 
 export type User = {
@@ -18,8 +24,8 @@ export type User = {
   name: string;
 }
 
-export type Comments = {
-  comment?: string;
+export type Comment = {
+  comment: string;
   date: string;
   id: number;
   rating: number;
@@ -32,36 +38,36 @@ export type Comments = {
 }
 
 export type Offer = {
-  bedrooms?: number;
-  city?: {
-    location?: {
-      latitude?: number;
-      longitude?: number;
-      zoom?: number;
+  bedrooms: number;
+  city: {
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
     };
     name: string;
   };
-  description?: string;
-  goods?: string[];
-  host?: {
-    avatarUrl?: string;
+  description: string;
+  goods: string[];
+  host: {
+    avatarUrl: string;
     id: number;
-    isPro?: boolean;
-    name?: string;
+    isPro: boolean;
+    name: string;
   };
   id: number;
-  images?: string[];
+  images: string[];
   isFavorite: boolean;
   isPremium: boolean;
-  location?: {
-    latitude?: number;
-    longitude?: number;
-    zoom?: number;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
   };
-  maxAdults?: number;
-  previewImage?: string;
-  price?: number;
-  rating?: number;
-  title?: string;
-  type?: string;
+  maxAdults: number;
+  previewImage: string;
+  price: number;
+  rating: number;
+  title: string;
+  type: string;
 }

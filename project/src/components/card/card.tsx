@@ -1,46 +1,77 @@
-import { Helmet } from 'react-helmet-async';
+import { Link, useLocation } from 'react-router-dom';
 import { Offer } from '../../types/types';
-import { isFaforite } from '../utils/utils';
+import { AppRoute } from '../../const/const';
 
 type Props = {
   offer: Offer;
-  onMouseEnter: (offerId: number) => void;
-  // onMouseLeave: () => void;
+  onMouseEnter?: (offerId: number) => void;
+  onMouseLeave?: () => void;
 }
 
-export default function Card({ offer, onMouseEnter}: Props) {
+export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
+  const location = useLocation();
 
-  function handleMouseEnter() {
-    onMouseEnter(offer.id);
+  let articleClassName;
+  let divClassName;
+  let previewImageWidth;
+  let previewImageHeight;
+
+  switch (location.pathname) {
+    case AppRoute.Main:
+      articleClassName = 'cities__card place-card';
+      divClassName = 'cities__image-wrapper place-card__image-wrapper';
+      previewImageWidth = '260';
+      previewImageHeight = '200';
+      break;
+    case AppRoute.Favorites:
+      articleClassName = 'favorites__card place-card';
+      divClassName = 'favorites__image-wrapper place-card__image-wrapper';
+      previewImageWidth = '150';
+      previewImageHeight = '110';
+      break;
+    default:
+      articleClassName = 'near-places__card place-card';
+      divClassName = 'near-places__image-wrapper place-card__image-wrapper';
+      previewImageWidth = '260';
+      previewImageHeight = '200';
   }
 
-  // function handleMpuseLeave() {
-  //   onMouseLeave();
-  // }
+
+  function handleMouseEnter() {
+    if (onMouseEnter) {
+      onMouseEnter(offer.id);
+    }
+  }
 
   return (
-    <>
-      <Helmet>
-        <title>Подробности предложения </title>
-      </Helmet>
-      <article className='cities__card place-card'
-        onMouseEnter={handleMouseEnter}
-      >
-        {offer.isPremium &&
-          <div className='place-card__mark'>
-            <span>Premium</span>
-          </div>}
-
-        <div className='cities__image-wrapper place-card__image-wrapper'>
-          <img className='place-card__image' src={offer.previewImage} width='260' height='200' alt='' />
+    <article className={articleClassName}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {
+        offer.isPremium &&
+        <div className='place-card__mark'>
+          <span>Premium</span>
         </div>
+      }
+      <div className={divClassName}>
+        <Link to={`/offer/${offer.id}`} key={offer.id} >
+          <img className='place-card__image' src={offer.previewImage} width={previewImageWidth} height={previewImageHeight} alt='' />
+        </Link>
+      </div>
+      <Link to={`/offer/${offer.id}`} key={offer.id} >
         <div className='place-card__info'>
           <div className='place-card__price-wrapper'>
             <div className='place-card__price'>
               <b className='place-card__price-value'>&euro;{offer.price}</b>
               <span className='place-card__price-text'>&#47;&nbsp;night</span>
             </div>
-            {isFaforite(offer.isFavorite)}
+            <button className={`place-card__bookmark-button  ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button `} type='button'>
+              <svg className='place-card__bookmark-icon' width='18' height='19'>
+                <use xlinkHref='#icon-bookmark'></use>
+              </svg>
+              <span className='visually-hidden'>To bookmarks</span>
+            </button>
           </div>
           {offer.rating &&
             <div className='place-card__rating rating'>
@@ -54,7 +85,7 @@ export default function Card({ offer, onMouseEnter}: Props) {
           </h2>
           <p className='place-card__type'>{offer.type}</p>
         </div>
-      </article >
-    </>
+      </Link >
+    </article >
   );
 }
