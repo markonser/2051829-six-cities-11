@@ -8,7 +8,7 @@ type Props = {
 }
 
 export function OffersList({ offers }: Props) {
-  const [, setActiveOffer] = useState<number>();
+  const [, setActiveOffer] = useState<number | undefined>();
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
