@@ -17,3 +17,4 @@ export const reducer = createReducer(initialState, (builfer) => {
       state.offers = offers;
     });
 });
+
