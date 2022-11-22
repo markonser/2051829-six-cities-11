@@ -1,9 +1,15 @@
 
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+// import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Card from '../../components/card/card';
+import CitiesNav from '../../components/cities-nav/cities-nav';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
+import { getNavCitiesList } from '../../store/selectors/getNavCitiesList';
+// import { getDefaultCityName } from '../../store/selectors/getDefaultCityName';
+// import { getOffersList } from '../../store/selectors/getOffersList';
 import { Offer } from '../../types/types';
 
 type Props = {
@@ -11,6 +17,10 @@ type Props = {
 }
 
 export default function MainPage({ offers }: Props) {
+
+  // const dispatch = useDispatch();
+
+
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
   const handleMouseEnter = (offerId: number) => {
@@ -19,6 +29,14 @@ export default function MainPage({ offers }: Props) {
   const handleMouseLeave = () => {
     setActiveOffer(undefined);
   };
+
+  // const offersList = useSelector(getOffersList);
+  // const cityName = useSelector(getDefaultCityName);
+  const navCitiesList = useSelector(getNavCitiesList);
+
+
+  // const offerItem = cityName && offersList.filter((item) => item.city.name === cityName)
+
   return (
     <div className='page page--gray page--main' >
       <Header />
@@ -26,18 +44,9 @@ export default function MainPage({ offers }: Props) {
         <title>Список предлоджений</title>
       </Helmet>
       <main className='page__main page__main--index'>
-        <h1 className='visually-hidden'>Cities</h1>
-        <div className='tabs'>
-          <section className='locations container'>
-            <ul className='locations__list tabs__list'>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item tabs__item--active' href='/'>
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+
+        <CitiesNav navCitiesList={navCitiesList} />;
+
         <div className='cities'>
           <div className='cities__places-container container'>
             <section className='cities__places places'>

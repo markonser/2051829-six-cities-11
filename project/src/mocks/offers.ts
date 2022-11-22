@@ -65,7 +65,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: 'Paris'
     },
     description: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: [
@@ -110,7 +110,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: 'Cologne'
     },
     description: 'mocks 3',
     goods: [
@@ -149,14 +149,14 @@ export const offers: Offer[] = [
     type: 'Apartment'
   },
   {
-    bedrooms: 5,
+    bedrooms: 4,
     city: {
       location: {
-        latitude: 52.370216,
+        latitude: 52.370239,
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Paris'
+      name: 'Hamburg'
     },
     description: 'mocks 4',
     goods: [
@@ -193,6 +193,241 @@ export const offers: Offer[] = [
     price: 80,
     rating: 4.5,
     title: 'mocks 4',
+    type: 'Apartment'
+  },
+  {
+    bedrooms: 2,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Hamburg'
+    },
+    description: 'mocks 5',
+    goods: [
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
+    ],
+    host: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 4,
+      isPro: true,
+      name: 'Max'
+    },
+    id: 5,
+    images: [
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
+    ],
+    isFavorite: true,
+    isPremium: true,
+    location: {
+      latitude: 52.3909953943608,
+      longitude: 4.939309666406098,
+      zoom: 8
+    },
+    maxAdults: 2,
+    previewImage: 'img/apartment-02.jpg',
+    price: 80,
+    rating: 4.5,
+    title: 'mocks 5',
+    type: 'Apartment'
+  },
+  {
+    bedrooms: 1,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Dusseldorf'
+    },
+    description: 'mocks 6',
+    goods: [
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
+    ],
+    host: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 4,
+      isPro: true,
+      name: 'Max'
+    },
+    id: 6,
+    images: [
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
+    ],
+    isFavorite: true,
+    isPremium: true,
+    location: {
+      latitude: 52.3809553943558,
+      longitude: 4.949309666406298,
+      zoom: 8
+    },
+    maxAdults: 2,
+    previewImage: 'img/apartment-02.jpg',
+    price: 80,
+    rating: 4.5,
+    title: 'mocks 6',
+    type: 'Apartment'
+  },
+  {
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Brussels'
+    },
+    description: 'mocks 7',
+    goods: [
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
+    ],
+    host: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 4,
+      isPro: true,
+      name: 'Max'
+    },
+    id: 7,
+    images: [
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
+    ],
+    isFavorite: true,
+    isPremium: true,
+    location: {
+      latitude: 52.3809553943408,
+      longitude: 4.919309666406198,
+      zoom: 8
+    },
+    maxAdults: 2,
+    previewImage: 'img/apartment-02.jpg',
+    price: 80,
+    rating: 4.5,
+    title: 'mocks 7',
+    type: 'Apartment'
+  },
+  {
+    bedrooms: 5,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Paris'
+    },
+    description: 'mocks 8',
+    goods: [
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
+    ],
+    host: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 4,
+      isPro: true,
+      name: 'Max'
+    },
+    id: 8,
+    images: [
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
+    ],
+    isFavorite: true,
+    isPremium: true,
+    location: {
+      latitude: 52.3509553943508,
+      longitude: 4.939309666406398,
+      zoom: 8
+    },
+    maxAdults: 2,
+    previewImage: 'img/apartment-02.jpg',
+    price: 80,
+    rating: 4.5,
+    title: 'mocks 8',
+    type: 'Apartment'
+  },
+  {
+    bedrooms: 5,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Cologne'
+    },
+    description: 'mocks 9',
+    goods: [
+      'Heating',
+      'Wi-Fi',
+      'Washing',
+      'machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel',
+      'TV',
+      'Fridge'
+    ],
+    host: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 4,
+      isPro: true,
+      name: 'Max'
+    },
+    id: 9,
+    images: [
+      'img/studio-01.jpg.jpg',
+      'img/apartment-01.jpg',
+    ],
+    isFavorite: true,
+    isPremium: true,
+    location: {
+      latitude: 52.3409553943208,
+      longitude: 4.939309666406198,
+      zoom: 8
+    },
+    maxAdults: 2,
+    previewImage: 'img/apartment-02.jpg',
+    price: 80,
+    rating: 4.5,
+    title: 'mocks 9',
     type: 'Apartment'
   }
 ];
