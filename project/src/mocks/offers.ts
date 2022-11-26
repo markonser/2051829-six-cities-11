@@ -9,7 +9,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: 'amsterdam'
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -65,7 +65,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Paris'
+      name: 'paris'
     },
     description: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: [
@@ -110,7 +110,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Cologne'
+      name: 'cologne'
     },
     description: 'mocks 3',
     goods: [
@@ -156,7 +156,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Hamburg'
+      name: 'hamburg'
     },
     description: 'mocks 4',
     goods: [
@@ -203,7 +203,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Hamburg'
+      name: 'hamburg'
     },
     description: 'mocks 5',
     goods: [
@@ -250,7 +250,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Dusseldorf'
+      name: 'dusseldorf'
     },
     description: 'mocks 6',
     goods: [
@@ -297,7 +297,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Brussels'
+      name: 'brussels'
     },
     description: 'mocks 7',
     goods: [
@@ -344,7 +344,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Paris'
+      name: 'paris'
     },
     description: 'mocks 8',
     goods: [
@@ -391,7 +391,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Cologne'
+      name: 'cologne'
     },
     description: 'mocks 9',
     goods: [

@@ -1,16 +1,16 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Card from '../../components/card/card';
 import CitiesNav from '../../components/cities-nav/cities-nav';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
-import { getNavCitiesList } from '../../store/selectors/getNavCitiesList';
-// import { getDefaultCityName } from '../../store/selectors/getDefaultCityName';
-// import { getOffersList } from '../../store/selectors/getOffersList';
+import { setOffers } from '../../store/reducer';
+import { getCityOffers } from '../../store/selectors/getCityOffers';
 import { Offer } from '../../types/types';
+
 
 type Props = {
   offers: Offer[];
@@ -18,8 +18,10 @@ type Props = {
 
 export default function MainPage({ offers }: Props) {
 
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setOffers(offers));
+  },[]);
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
@@ -30,12 +32,7 @@ export default function MainPage({ offers }: Props) {
     setActiveOffer(undefined);
   };
 
-  // const offersList = useSelector(getOffersList);
-  // const cityName = useSelector(getDefaultCityName);
-  const navCitiesList = useSelector(getNavCitiesList);
-
-
-  // const offerItem = cityName && offersList.filter((item) => item.city.name === cityName)
+  const offersList = useSelector(getCityOffers);
 
   return (
     <div className='page page--gray page--main' >
@@ -45,13 +42,13 @@ export default function MainPage({ offers }: Props) {
       </Helmet>
       <main className='page__main page__main--index'>
 
-        <CitiesNav navCitiesList={navCitiesList} />;
+        <CitiesNav />;
 
         <div className='cities'>
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{offers.length} places to stay in Amsterdam</b>
+              <b className='places__found'>{offersList.length} places to stay in Amsterdam</b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>
@@ -69,7 +66,7 @@ export default function MainPage({ offers }: Props) {
               </form>
               <div className='cities__places-list places__list tabs__content'>
                 {
-                  offers.map((offer) => (
+                  offersList.map((offer) => (
                     <Card
                       key={offer.id}
                       offer={offer}
@@ -82,7 +79,7 @@ export default function MainPage({ offers }: Props) {
             </section>
             <div className='cities__right-section'>
               <Map
-                offers={offers}
+                offers={offersList}
                 selectedPoint={activeOffer}
                 elementSelector={'cities__map map'}
               />
