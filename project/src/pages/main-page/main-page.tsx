@@ -7,6 +7,8 @@ import Card from '../../components/card/card';
 import CitiesNav from '../../components/cities-nav/cities-nav';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
+import Sorting from '../../components/sorting/sorting';
+import { SortType } from '../../const/const';
 import { setOffers } from '../../store/reducer';
 import { getCityOffers } from '../../store/selectors/getCityOffers';
 import { getSelectedCity } from '../../store/selectors/getSelectedCity';
@@ -22,7 +24,7 @@ export default function MainPage({ offers }: Props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setOffers(offers));
-  },[]);
+  }, []);
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
@@ -35,6 +37,27 @@ export default function MainPage({ offers }: Props) {
 
   const offersList = useSelector(getCityOffers);
   const selectedCity = useSelector(getSelectedCity);
+
+  const sortOffers = (SortType: keyof typeof SortType): void => {
+    let sortedOffersBySortType;
+    switch (SortType) {
+      case SortType.Popular:
+        sortedOffersBySortType = offers.filter((it) => it.city.name === city);
+        break;
+      case SortType.PriceLowToHigh:
+        sortedOffersBySortType = [...offers].sort((a, b) => a.price - b.price);
+        break;
+      case SortType.PriceHighToLow:
+        sortedOffersBySortType = [...offers].sort((a, b) => b.price - a.price);
+        break;
+      case SortType.RatingHighToLow:
+        sortedOffersBySortType = [...offers].sort((a, b) => b.rating - a.rating);
+        break;
+      default:
+        sortedOffersBySortType = offers.filter((it) => it.city.name === city);
+    }
+    setOffers(sortedOffersBySortType);
+  };
 
   return (
     <div className='page page--gray page--main' >
@@ -51,7 +74,8 @@ export default function MainPage({ offers }: Props) {
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>{offersList.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
-              <form className='places__sorting' action='#' method='get'>
+              <Sorting />
+              {/* <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>
                   Popular
@@ -65,7 +89,7 @@ export default function MainPage({ offers }: Props) {
                   <li className='places__option' tabIndex={0}>Price: high to low</li>
                   <li className='places__option' tabIndex={0}>Top rated first</li>
                 </ul>
-              </form>
+              </form> */}
               <div className='cities__places-list places__list tabs__content'>
                 {
                   offersList.map((offer) => (

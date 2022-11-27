@@ -97,7 +97,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/room.jpg',
-    price: 80,
+    price: 200,
     rating: 2,
     title: 'Заголовок объявления mocks 2',
     type: 'Room'
@@ -143,7 +143,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/apartment-03.jpg',
-    price: 80,
+    price: 300,
     rating: 3,
     title: 'mocks 3',
     type: 'Apartment'
@@ -190,7 +190,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/apartment-02.jpg',
-    price: 80,
+    price: 400,
     rating: 4.5,
     title: 'mocks 4',
     type: 'Apartment'
@@ -237,7 +237,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/apartment-02.jpg',
-    price: 80,
+    price: 500,
     rating: 4.5,
     title: 'mocks 5',
     type: 'Apartment'
@@ -284,7 +284,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/apartment-02.jpg',
-    price: 80,
+    price: 60,
     rating: 4.5,
     title: 'mocks 6',
     type: 'Apartment'
@@ -331,7 +331,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/apartment-02.jpg',
-    price: 80,
+    price: 70,
     rating: 4.5,
     title: 'mocks 7',
     type: 'Apartment'
@@ -425,7 +425,7 @@ export const offers: Offer[] = [
     },
     maxAdults: 2,
     previewImage: 'img/apartment-02.jpg',
-    price: 80,
+    price: 90,
     rating: 4.5,
     title: 'mocks 9',
     type: 'Apartment'
