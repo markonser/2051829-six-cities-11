@@ -61,8 +61,8 @@ export const offers: Offer[] = [
     bedrooms: 3,
     city: {
       location: {
-        latitude:2.351557,
-        longitude:48.861694,
+        latitude:48.861694,
+        longitude:2.351557,
         zoom: 10
       },
       name: 'paris'
@@ -91,8 +91,8 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude:2.3515578985,
-      longitude:48.8616254694,
+      latitude:48.8616254694,
+      longitude:2.3515578985,
       zoom: 8
     },
     maxAdults: 2,
@@ -106,8 +106,8 @@ export const offers: Offer[] = [
     bedrooms: 3,
     city: {
       location: {
-        latitude:6.938399,
-        longitude:50.930779,
+        latitude:50.930779,
+        longitude:6.938399,
         zoom: 10
       },
       name: 'cologne'
@@ -137,8 +137,8 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: true,
     location: {
-      latitude:6.938845399,
-      longitude:50.930526779,
+      latitude:50.930779,
+      longitude:6.938399,
       zoom: 8
     },
     maxAdults: 2,
@@ -293,8 +293,8 @@ export const offers: Offer[] = [
     bedrooms: 3,
     city: {
       location: {
-        latitude:4.352131,
-        longitude:50.854283,
+        latitude:50.854283,
+        longitude:4.352131,
         zoom: 10
       },
       name: 'brussels'
@@ -325,8 +325,8 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude:4.352256131,
-      longitude:50.854125283,
+      latitude:50.854125283,
+      longitude:4.352256131,
       zoom: 8
     },
     maxAdults: 2,
@@ -340,8 +340,8 @@ export const offers: Offer[] = [
     bedrooms: 5,
     city: {
       location: {
-        latitude:2.351557,
-        longitude:48.861694,
+        latitude:48.861694,
+        longitude:2.351557,
         zoom: 10
       },
       name: 'paris'
@@ -372,8 +372,8 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude:2.345251557,
-      longitude:48.836561694,
+      latitude:48.836561694,
+      longitude:2.345251557,
       zoom: 8
     },
     maxAdults: 2,
@@ -387,8 +387,8 @@ export const offers: Offer[] = [
     bedrooms: 5,
     city: {
       location: {
-        latitude:6.938399,
-        longitude:50.930779,
+        latitude:50.930779,
+        longitude:6.938399,
         zoom: 10
       },
       name: 'cologne'
@@ -419,8 +419,8 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude:6.932236399,
-      longitude:50.930365779,
+      latitude:50.93945365779,
+      longitude:6.93654236399,
       zoom: 8
     },
     maxAdults: 2,

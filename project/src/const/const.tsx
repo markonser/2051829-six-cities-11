@@ -15,20 +15,20 @@ export const URL_MARKER_CURRENT =
 export const cityNames = {
   paris: {
     name: 'paris',
-    latitude:2.351557,
-    longitude:48.861694,
+    latitude:48.861694,
+    longitude:2.351557,
     zoom: 12
   },
   cologne: {
     name: 'cologne',
-    latitude:6.938399,
-    longitude:50.930779,
+    latitude:50.930779,
+    longitude:6.938399,
     zoom: 12
   },
   brussels: {
     name: 'brussels',
-    latitude:4.352131,
-    longitude:50.854283,
+    latitude:50.854283,
+    longitude:4.352131,
     zoom: 12
   },
   amsterdam: {
@@ -54,7 +54,7 @@ export const cityNames = {
 export type CityName = keyof typeof cityNames;
 
 export enum SortType {
-  Default = 'Default',
+  Popular = 'Popular',
   PriceLowToHigh = 'PriceLowToHigh',
   PriceHighToLow = 'PriceHighToLow',
   RatingHighToLow = 'RatingHighToLow'
