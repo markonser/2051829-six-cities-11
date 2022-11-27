@@ -1,8 +1,6 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import { Map, TileLayer } from 'leaflet';
 import { Offer } from '../../types/types';
-import { useSelector } from 'react-redux';
-import { getSelectedCity } from '../../store/selectors/getSelectedCity';
 import { cityNames } from '../../const/const';
 
 function useMap(
@@ -11,14 +9,13 @@ function useMap(
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
-  const selectedCity = useSelector(getSelectedCity);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: cityNames[selectedCity].latitude,
-          lng: cityNames[selectedCity].longitude
+          lat: cityNames.paris.latitude,
+          lng: cityNames.paris.longitude
         },
         zoom: 12
       });
@@ -36,7 +33,7 @@ function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, map, offer]);
+  }, [mapRef, map]);
   return map;
 
 }

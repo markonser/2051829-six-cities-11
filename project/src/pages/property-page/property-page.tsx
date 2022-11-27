@@ -63,7 +63,7 @@ export default function Property({ offers, comments }: Props) {
                   </h1>}
 
                 <button className='property__bookmark-button property__bookmark-button--active button' type='button'>
-                  <svg className='property__bookmark-icon' width='31' height='33'>
+                  <svg className={`property__bookmark-icon ${offer.isFavorite ? 'place-card__bookmark-icon' : ''}`} width='31' height='33'>
                     <use xlinkHref='#icon-bookmark'></use>
                   </svg>
                   <span className='visually-hidden'>To bookmarks</span>

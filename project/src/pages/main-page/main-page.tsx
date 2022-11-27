@@ -9,6 +9,7 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import { setOffers } from '../../store/reducer';
 import { getCityOffers } from '../../store/selectors/getCityOffers';
+import { getSelectedCity } from '../../store/selectors/getSelectedCity';
 import { Offer } from '../../types/types';
 
 
@@ -33,6 +34,7 @@ export default function MainPage({ offers }: Props) {
   };
 
   const offersList = useSelector(getCityOffers);
+  const selectedCity = useSelector(getSelectedCity);
 
   return (
     <div className='page page--gray page--main' >
@@ -48,7 +50,7 @@ export default function MainPage({ offers }: Props) {
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{offersList.length} places to stay in Amsterdam</b>
+              <b className='places__found'>{offersList.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>

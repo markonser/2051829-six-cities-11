@@ -8,8 +8,9 @@ export default function CitiesNav(): JSX.Element {
 
   const name = Object.keys(cityNames).map((city) => cityNames[city].name);
 
-  const changeCityHandler = (cityName: CityName) => {
+  const changeCityHandler = (evt: React.MouseEvent<HTMLElement>, cityName: CityName) => {
     dispatch(changeCity(cityName));
+    evt.target.closest('div').classList.add('tabs__item--active');
   };
   return (
     <>
@@ -18,10 +19,10 @@ export default function CitiesNav(): JSX.Element {
         <section className='locations container'>
           <ul className='locations__list tabs__list' >
             {
-              name.map((city) => (
-                <li className='locations__item' key={Math.random()} onClick={() => changeCityHandler(city)} >
-                  <div className='locations__item-link tabs__item tabs__item--active'>
-                    <span>{city}</span>
+              name.map((city: CityName) => (
+                <li className='locations__item' key={Math.random()} onClick={(evt) => changeCityHandler(evt, city)} >
+                  <div className='locations__item-link tabs__item'>
+                    <span>{city.toUpperCase()}</span>
                   </div>
                 </li>
               )
