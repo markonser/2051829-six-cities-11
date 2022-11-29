@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CityName, cityNames } from '../../const/const';
 import { changeCity } from '../../store/reducer';
@@ -7,10 +7,11 @@ export default function CitiesNav(): JSX.Element {
 
   const dispatch = useDispatch();
   const [active, setActive] = useState('paris');
-  const name = Object.values(cityNames).map((city) => city.name);
+  // const name = Object.values(cityNames).map((city) => city.name);
   // const name = Object.keys(cityNames).map((city) => cityNames[city].name);
+  const cityNamesList = useMemo(() => Object.values(cityNames).map((city) => city.name), []);
 
-  const changeCityHandler = (evt: React.MouseEvent<HTMLElement>, cityName:string) => {
+  const changeCityHandler = (evt: React.MouseEvent<HTMLElement>, cityName: CityName) => {
     evt.preventDefault();
     dispatch(changeCity(cityName));
     setActive(cityName);
@@ -23,7 +24,7 @@ export default function CitiesNav(): JSX.Element {
         <section className='locations container'>
           <ul className='locations__list tabs__list' >
             {
-              name.map((cityName) => {
+              cityNamesList.map((cityName:CityName) => {
                 const isActive = (cityName === active);
                 return (
                   <li className='locations__item' key={Math.random()} onClick={(evt) => changeCityHandler(evt, cityName)} >
