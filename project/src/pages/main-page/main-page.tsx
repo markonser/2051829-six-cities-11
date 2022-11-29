@@ -24,7 +24,7 @@ export default function MainPage({ offers }: Props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setOffers(offers));
-  }, []);
+  }, [dispatch,offers]);
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
@@ -38,11 +38,11 @@ export default function MainPage({ offers }: Props) {
   const offersList = useSelector(getCityOffers);
   const selectedCity = useSelector(getSelectedCity);
 
-  const sortOffers = (SortType: keyof typeof SortType): void => {
+  const sortOffers = (sortBy:keyof typeof SortType): void => {
     let sortedOffersBySortType;
-    switch (SortType) {
+    switch (sortBy) {
       case SortType.Popular:
-        sortedOffersBySortType = offers.filter((it) => it.city.name === city);
+        sortedOffersBySortType = offers.filter((it) => it.city.name === selectedCity);
         break;
       case SortType.PriceLowToHigh:
         sortedOffersBySortType = [...offers].sort((a, b) => a.price - b.price);
@@ -54,9 +54,9 @@ export default function MainPage({ offers }: Props) {
         sortedOffersBySortType = [...offers].sort((a, b) => b.rating - a.rating);
         break;
       default:
-        sortedOffersBySortType = offers.filter((it) => it.city.name === city);
+        sortedOffersBySortType = offers.filter((it) => it.city.name === selectedCity);
     }
-    setOffers(sortedOffersBySortType);
+    dispatch(setOffers(sortedOffersBySortType));
   };
 
   return (
@@ -74,7 +74,7 @@ export default function MainPage({ offers }: Props) {
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>{offersList.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
-              <Sorting />
+              <Sorting sortOffers={sortOffers}/>
               {/* <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>

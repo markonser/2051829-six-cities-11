@@ -6,12 +6,17 @@ type SortProps = {
   sortOffers(action: keyof typeof SortType): void;
 }
 
-function Sort({sortOffers}: SortProps) {
+function Sort({ sortOffers }: SortProps) {
 
+  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('Popular');
 
+  const showFilterHandler = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" onClick={showFilterHandler}>
       <span className="places__sorting-caption">Sort by  </span>
       <span className="places__sorting-type" tabIndex={0}>
         {title}
@@ -19,7 +24,8 @@ function Sort({sortOffers}: SortProps) {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className="places__options places__options--custom places__options--opened">
+
+      <ul className={`places__options places__options--custom  ${isOpen ? 'places__options--opened' : ''}`}>
         <li
           className="places__option places__option--active"
           tabIndex={0}
