@@ -28,4 +28,3 @@ export const reducer = createSlice({
 
 export const { changeCity, setOffers } = reducer.actions;
 export default reducer.reducer;
-
