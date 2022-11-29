@@ -24,7 +24,7 @@ export default function MainPage({ offers }: Props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setOffers(offers));
-  }, [dispatch,offers]);
+  }, [dispatch, offers]);
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
@@ -38,7 +38,7 @@ export default function MainPage({ offers }: Props) {
   const offersList = useSelector(getCityOffers);
   const selectedCity = useSelector(getSelectedCity);
 
-  const sortOffers = (sortBy:keyof typeof SortType): void => {
+  const sortOffers = (sortBy: keyof typeof SortType): void => {
     let sortedOffersBySortType;
     switch (sortBy) {
       case SortType.Popular:
@@ -74,22 +74,9 @@ export default function MainPage({ offers }: Props) {
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>{offersList.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
-              <Sorting sortOffers={sortOffers}/>
-              {/* <form className='places__sorting' action='#' method='get'>
-                <span className='places__sorting-caption'>Sort by</span>
-                <span className='places__sorting-type' tabIndex={0}>
-                  Popular
-                  <svg className='places__sorting-arrow' width='7' height='4'>
-                    <use xlinkHref='#icon-arrow-select'></use>
-                  </svg>
-                </span>
-                <ul className='places__options places__options--custom places__options--opened'>
-                  <li className='places__option places__option--active' tabIndex={0}>Popular</li>
-                  <li className='places__option' tabIndex={0}>Price: low to high</li>
-                  <li className='places__option' tabIndex={0}>Price: high to low</li>
-                  <li className='places__option' tabIndex={0}>Top rated first</li>
-                </ul>
-              </form> */}
+
+              <Sorting sortOffers={sortOffers} />
+
               <div className='cities__places-list places__list tabs__content'>
                 {
                   offersList.map((offer) => (

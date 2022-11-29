@@ -7,8 +7,6 @@ export default function CitiesNav(): JSX.Element {
 
   const dispatch = useDispatch();
   const [active, setActive] = useState('paris');
-  // const name = Object.values(cityNames).map((city) => city.name);
-  // const name = Object.keys(cityNames).map((city) => cityNames[city].name);
   const cityNamesList = useMemo(() => Object.values(cityNames).map((city) => city.name), []);
 
   const changeCityHandler = (evt: React.MouseEvent<HTMLElement>, cityName: CityName) => {
