@@ -7,7 +7,7 @@ export const getOffersLoading = (state: RootState) => state.offers.loading;
 export const getCityOffers = (state: RootState) => {
   const cityName = cityNames[state.offers.selectedCity].name;
   const filtered = state.offers.offers.filter((offer) => {
-    const indicator = offer.city.name.toLowerCase === cityName.toString;
+    const indicator = offer.city.name.toLowerCase() === cityName;
     return indicator;
   });
 

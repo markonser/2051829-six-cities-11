@@ -19,9 +19,6 @@ export default function MainPage() {
   const loading = useSelector(getOffersLoading);
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
-  console.log(selectedCity);
-  console.log(cityOffers);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setOffers(offers));
@@ -38,19 +35,19 @@ export default function MainPage() {
     let sortedOffersBySortType;
     switch (sortBy) {
       case SortType.Popular:
-        sortedOffersBySortType = offers.filter((it) => it.city.name === selectedCity);
+        sortedOffersBySortType = cityOffers.filter((it) => it.city.name === selectedCity);
         break;
       case SortType.PriceLowToHigh:
-        sortedOffersBySortType = [...offers].sort((a, b) => a.price - b.price);
+        sortedOffersBySortType = [...cityOffers].sort((a, b) => a.price - b.price);
         break;
       case SortType.PriceHighToLow:
-        sortedOffersBySortType = [...offers].sort((a, b) => b.price - a.price);
+        sortedOffersBySortType = [...cityOffers].sort((a, b) => b.price - a.price);
         break;
       case SortType.RatingHighToLow:
-        sortedOffersBySortType = [...offers].sort((a, b) => b.rating - a.rating);
+        sortedOffersBySortType = [...cityOffers].sort((a, b) => b.rating - a.rating);
         break;
       default:
-        sortedOffersBySortType = offers.filter((it) => it.city.name === selectedCity);
+        sortedOffersBySortType = cityOffers.filter((it) => it.city.name === selectedCity);
     }
     dispatch(setOffers(sortedOffersBySortType));
   };
@@ -69,14 +66,14 @@ export default function MainPage() {
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{offers.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
+              <b className='places__found'>{cityOffers.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
 
               <Sorting sortOffers={sortOffers} />
 
               <div className='cities__places-list places__list tabs__content'>
                 {loading && <div>Loading in progress...</div>}
                 {
-                  offers.map((offer) => (
+                  cityOffers.map((offer) => (
                     <Card
                       key={offer.id}
                       offer={offer}
@@ -89,7 +86,7 @@ export default function MainPage() {
             </section>
             <div className='cities__right-section'>
               <Map
-                offers={offers}
+                offers={cityOffers}
                 selectedPoint={activeOffer}
                 elementSelector={'cities__map map'}
               />
