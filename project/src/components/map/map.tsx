@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { cityNames, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const/const';
 import { Offer } from '../../types/types';
 import useMap from '../../hooks/use-map/use-map';
-import { getSelectedCity } from '../../store/selectors/getSelectedCity';
+import { getSelectedCity } from '../../store/selectors';
 import { useSelector } from 'react-redux';
 
 type MapProps = {

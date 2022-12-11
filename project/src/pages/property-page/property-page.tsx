@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { Comment, Offer } from '../../types/types';
-
 import Header from '../../components/header/header';
 import RewiewsList from '../../components/reviews-list/reviews-list';
 import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
 import { useState } from 'react';
 import Card from '../../components/card/card';
+import { useSelector } from 'react-redux';
+import { getCityOffers } from '../../store/selectors';
 
 type Props = {
   offers: Offer[];
@@ -16,6 +17,7 @@ type Props = {
 export default function Property({ offers, comments }: Props) {
   const params = useParams();
   const offer = offers.find((el) => el.id === Number(params.id));
+  const nearestPlaces = useSelector(getCityOffers);
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
@@ -127,12 +129,11 @@ export default function Property({ offers, comments }: Props) {
 
               <RewiewsList comments={comments} />
 
-
             </div>
           </div>
         </section>
         <Map
-          offers={offers}
+          offers={nearestPlaces}
           selectedPoint={activeOffer}
           elementSelector={'property__map map'}
         />
@@ -142,7 +143,7 @@ export default function Property({ offers, comments }: Props) {
           <h2 className='near-places__title'>Other places in the neighbourhood</h2>
           <div className='near-places__list places__list'>
             {
-              offers.map((item) => (
+              nearestPlaces.map((item) => (
                 <Card
                   key={item.id}
                   offer={item}

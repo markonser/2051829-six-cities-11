@@ -1,10 +1,19 @@
+import { createAPI } from './../services/api';
 import { configureStore } from '@reduxjs/toolkit';
-import Reducer from './reducer';
+import offers from './offers';
+
+export const api = createAPI();
 
 export const store = configureStore({
   reducer: {
-    offers: Reducer,
+    offers,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

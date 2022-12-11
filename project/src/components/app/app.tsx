@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
-import { Comment, Offer} from '../../types/types';
 import Favorites from '../../pages/favorites-page/favorites-page';
 import Login from '../../pages/login-page/login-page';
 import PrivateRoute from '../private-route/private-route';
@@ -9,22 +8,19 @@ import Property from '../../pages/property-page/property-page';
 import ScrollToTop from '../../hooks/scroll-to-top/scroll-to-top';
 import { AppRoute } from '../../const/const';
 import { HelmetProvider } from 'react-helmet-async';
+import { useSelector } from 'react-redux';
+import { getOffers } from '../../store/selectors';
 
-type Props = {
-  offers: Offer[];
-  comments:Comment[];
-}
+function App() {
+  const offers = useSelector(getOffers);
 
-function App({offers, comments }: Props) {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
           <Route path={AppRoute.Main} element={
-            <MainPage
-              offers={offers}
-            />
+            <MainPage />
           }
           />
           <Route path={AppRoute.Login} element={<Login />} />
@@ -33,7 +29,7 @@ function App({offers, comments }: Props) {
             element={
               <Property
                 offers={offers}
-                comments={comments}
+                comments={[]}
               />
             }
           />
