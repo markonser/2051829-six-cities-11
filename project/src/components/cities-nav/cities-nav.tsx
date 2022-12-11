@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CityName, cityNames } from '../../const/const';
-import { changeCity } from '../../store/reducer';
+import { changeCity } from '../../store/offers';
 
 export default function CitiesNav(): JSX.Element {
 

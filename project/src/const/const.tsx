@@ -6,6 +6,14 @@ export enum AppRoute {
   NotFound = '*'
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+  Reviews = '/comments',
+  Favorite = '/favorite',
+}
+
 export const URL_MARKER_DEFAULT =
   '/img/pin.svg';
 
@@ -13,7 +21,7 @@ export const URL_MARKER_CURRENT =
   '/img/pin-active.svg';
 
 export type cityNamesType = Record<string, {
-  name: keyof typeof cityNames;
+  name: string;
   latitude: number;
   longitude: number;
   zoom: number;

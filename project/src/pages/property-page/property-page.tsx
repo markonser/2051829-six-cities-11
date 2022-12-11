@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { Comment, Offer } from '../../types/types';
-
 import Header from '../../components/header/header';
 import RewiewsList from '../../components/reviews-list/reviews-list';
 import { Helmet } from 'react-helmet-async';

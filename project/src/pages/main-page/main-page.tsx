@@ -9,24 +9,23 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sorting from '../../components/sorting/sorting';
 import { SortType } from '../../const/const';
-import { setOffers } from '../../store/reducer';
-import { getCityOffers } from '../../store/selectors/getCityOffers';
-import { getSelectedCity } from '../../store/selectors/getSelectedCity';
-import { Offer } from '../../types/types';
+import { setOffers } from '../../store/offers';
+import { getSelectedCity, getOffersLoading, getCityOffers, getOffers } from '../../store/selectors';
 
+export default function MainPage() {
+  const offers = useSelector(getOffers);
+  const cityOffers = useSelector(getCityOffers);
+  const selectedCity = useSelector(getSelectedCity);
+  const loading = useSelector(getOffersLoading);
+  const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
-type Props = {
-  offers: Offer[];
-}
-
-export default function MainPage({ offers }: Props) {
+  console.log(selectedCity);
+  console.log(cityOffers);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setOffers(offers));
-  }, [dispatch, offers]);
-
-  const [activeOffer, setActiveOffer] = useState<number | undefined>();
+  }, [dispatch,offers]);
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
@@ -34,9 +33,6 @@ export default function MainPage({ offers }: Props) {
   const handleMouseLeave = () => {
     setActiveOffer(undefined);
   };
-
-  const offersList = useSelector(getCityOffers);
-  const selectedCity = useSelector(getSelectedCity);
 
   const sortOffers = (sortBy: keyof typeof SortType): void => {
     let sortedOffersBySortType;
@@ -67,19 +63,20 @@ export default function MainPage({ offers }: Props) {
       </Helmet>
       <main className='page__main page__main--index'>
 
-        <CitiesNav />;
+        <CitiesNav />
 
         <div className='cities'>
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{offersList.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
+              <b className='places__found'>{offers.length} places to stay in {`${selectedCity.charAt(0).toUpperCase()}${selectedCity.slice(1)}`}</b>
 
               <Sorting sortOffers={sortOffers} />
 
               <div className='cities__places-list places__list tabs__content'>
+                {loading && <div>Loading in progress...</div>}
                 {
-                  offersList.map((offer) => (
+                  offers.map((offer) => (
                     <Card
                       key={offer.id}
                       offer={offer}
@@ -92,7 +89,7 @@ export default function MainPage({ offers }: Props) {
             </section>
             <div className='cities__right-section'>
               <Map
-                offers={offersList}
+                offers={offers}
                 selectedPoint={activeOffer}
                 elementSelector={'cities__map map'}
               />
