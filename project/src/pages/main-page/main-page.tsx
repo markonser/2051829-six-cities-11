@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -10,19 +10,14 @@ import Map from '../../components/map/map';
 import Sorting from '../../components/sorting/sorting';
 import { SortType } from '../../const/const';
 import { setOffers } from '../../store/offers';
-import { getSelectedCity, getOffersLoading, getCityOffers, getOffers } from '../../store/selectors';
+import { getSelectedCity, getOffersLoading, getCityOffers } from '../../store/selectors';
 
 export default function MainPage() {
-  const offers = useSelector(getOffers);
   const cityOffers = useSelector(getCityOffers);
   const selectedCity = useSelector(getSelectedCity);
   const loading = useSelector(getOffersLoading);
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setOffers(offers));
-  }, [dispatch,offers]);
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);

@@ -19,7 +19,7 @@ const initialState: State = {
 };
 
 export const offers = createSlice({
-  name: 'counter',
+  name: 'offers',
   initialState,
   reducers: {
     changeCity: (state: State, action: PayloadAction<CityName>) => {

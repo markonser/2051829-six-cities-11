@@ -17,3 +17,16 @@ export const fetchOfferAction = createAsyncThunk<Offer[], undefined, {
     return data;
   },
 );
+
+export const fetchCommentsAction = createAsyncThunk<Offer[], undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (_arg, { dispatch, extra: api }) => {
+    const { data } = await api.get<Offer[]>(APIRoute.Offers);
+    dispatch(setOffers(data));
+    return data;
+  },
+);

@@ -8,8 +8,12 @@ import Property from '../../pages/property-page/property-page';
 import ScrollToTop from '../../hooks/scroll-to-top/scroll-to-top';
 import { AppRoute } from '../../const/const';
 import { HelmetProvider } from 'react-helmet-async';
+import { useSelector } from 'react-redux';
+import { getOffers } from '../../store/selectors';
 
 function App() {
+  const offers = useSelector(getOffers);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -24,7 +28,7 @@ function App() {
             path={AppRoute.Room}
             element={
               <Property
-                offers={[]}
+                offers={offers}
                 comments={[]}
               />
             }
@@ -32,7 +36,7 @@ function App() {
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute>
               <Favorites
-                offers={[]}
+                offers={offers}
               />
             </PrivateRoute>
           }
