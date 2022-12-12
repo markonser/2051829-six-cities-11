@@ -12,6 +12,7 @@ import { SortType } from '../../const/const';
 import { setOffers } from '../../store/offers';
 import { getSelectedCity, getOffersLoading, getCityOffers } from '../../store/selectors';
 
+
 export default function MainPage() {
   const cityOffers = useSelector(getCityOffers);
   const selectedCity = useSelector(getSelectedCity);

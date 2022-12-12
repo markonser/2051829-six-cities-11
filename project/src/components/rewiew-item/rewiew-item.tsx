@@ -1,11 +1,12 @@
 import { Comment } from '../../types/types';
+import dayjs from 'dayjs';
 
 type Props = {
   comment: Comment;
 }
 
 export default function RewiewItem({ comment }: Props): JSX.Element {
-
+  const date = dayjs(comment.date).format('MMMM DD');
   return (
     <li className='reviews__item'>
       <div className='reviews__user user'>
@@ -26,10 +27,9 @@ export default function RewiewItem({ comment }: Props): JSX.Element {
         <p className='reviews__text'>
           {comment.comment}
         </p>
-        <time className='reviews__time'>{comment.date}</time>
+        <time className='reviews__time'>{date}</time>
       </div>
     </li>
-
   );
 }
 

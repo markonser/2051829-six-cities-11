@@ -1,12 +1,14 @@
 import { createAPI } from './../services/api';
 import { configureStore } from '@reduxjs/toolkit';
 import offers from './offers';
+import comments from './comments';
 
 export const api = createAPI();
 
 export const store = configureStore({
   reducer: {
     offers,
+    comments,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

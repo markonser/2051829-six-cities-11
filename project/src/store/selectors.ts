@@ -2,6 +2,7 @@ import { cityNames } from '../const/const';
 import { RootState } from './index';
 
 export const getOffers = (state: RootState) => state.offers.offers;
+export const getComments = (state: RootState) => state.comments.comments;
 export const getOffersLoading = (state: RootState) => state.offers.loading;
 
 export const getCityOffers = (state: RootState) => {

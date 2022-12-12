@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Comment, Offer } from '../../types/types';
+import { Offer } from '../../types/types';
 import Header from '../../components/header/header';
 import RewiewsList from '../../components/reviews-list/reviews-list';
 import { Helmet } from 'react-helmet-async';
@@ -7,19 +8,31 @@ import Map from '../../components/map/map';
 import { useState } from 'react';
 import Card from '../../components/card/card';
 import { useSelector } from 'react-redux';
-import { getCityOffers } from '../../store/selectors';
+import { getCityOffers, getComments } from '../../store/selectors';
+import { fetchCommentsAction } from '../../store/api-actions';
+import { store } from '../../store';
+import { fetchNeighbourhood } from '../../services/utils';
 
 type Props = {
   offers: Offer[];
-  comments: Comment[];
 }
 
-export default function Property({ offers, comments }: Props) {
-  const params = useParams();
-  const offer = offers.find((el) => el.id === Number(params.id));
+export default function Property({ offers }: Props) {
+  const { id } = useParams();
+  const offer = offers.find((el) => el.id === Number(id));
   const nearestPlaces = useSelector(getCityOffers);
+  const comments = useSelector(getComments);
+
+  let neighbourhood;
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
+
+  useEffect(() => {
+    if (offer) {
+      store.dispatch(fetchCommentsAction(id as string));
+      neighbourhood = fetchNeighbourhood(id as string);
+    }
+  }, [offer, id]);
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
