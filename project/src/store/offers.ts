@@ -1,7 +1,7 @@
 import { CityName } from '../const/const';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Offer } from '../types/types';
+import { Offer, UserData } from '../types/types';
 import { fetchOfferAction } from './api-actions';
 
 export interface State {
@@ -9,6 +9,7 @@ export interface State {
   offers: Offer[];
   loading: boolean;
   hasError: boolean;
+  userData: UserData | undefined;
 }
 
 const initialState: State = {
@@ -16,6 +17,7 @@ const initialState: State = {
   offers: [],
   loading: false,
   hasError: false,
+  userData: undefined,
 };
 
 export const offers = createSlice({
@@ -27,6 +29,9 @@ export const offers = createSlice({
     },
     setOffers: (state: State, action: PayloadAction<Offer[]>) => {
       state.offers = action.payload;
+    },
+    setUserData: (state: State, action: PayloadAction<UserData | undefined>) => {
+      state.userData = action.payload;
     },
   },
   extraReducers(builder) {
@@ -46,5 +51,5 @@ export const offers = createSlice({
   },
 });
 
-export const { changeCity, setOffers } = offers.actions;
+export const { changeCity, setOffers, setUserData } = offers.actions;
 export default offers.reducer;

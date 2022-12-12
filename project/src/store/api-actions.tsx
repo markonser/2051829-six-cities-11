@@ -3,9 +3,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthData, Comment, Offer, UserData } from '../types/types';
 import { AppDispatch, RootState } from './index';
 import { APIRoute, OfferId } from '../const/const';
-import { setOffers } from './offers';
-import { dropUser, saveUser } from '../services/user';
+import { setOffers, setUserData } from './offers';
 import { setComments } from './comments';
+import { dropToken, saveToken } from '../services/token';
 
 export const fetchOfferAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
@@ -20,7 +20,7 @@ export const fetchOfferAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const fetchCommentsAction = createAsyncThunk<Comment[], string , {
+export const fetchCommentsAction = createAsyncThunk<Comment[], string, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
@@ -39,7 +39,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth', async (_arg, { dispatch, extra: api }) => {
-    await api.get(APIRoute.Login);
+    const { data } = await api.get<UserData>(APIRoute.Login);
+    dispatch(setUserData(data));
   }
 );
 
@@ -51,7 +52,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
     const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveUser(data);
+    saveToken(data.token);
+    dispatch(setUserData(data));
   },
 );
 
@@ -63,7 +65,8 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   'user/logout',
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
-    dropUser();
+    dropToken();
+    dispatch(setUserData(undefined));
   },
 );
 

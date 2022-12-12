@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Offer } from '../../types/types';
 import Header from '../../components/header/header';
@@ -10,8 +10,8 @@ import Card from '../../components/card/card';
 import { useSelector } from 'react-redux';
 import { getCityOffers, getComments } from '../../store/selectors';
 import { fetchCommentsAction } from '../../store/api-actions';
-import { store } from '../../store';
 import { fetchNeighbourhood } from '../../services/utils';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 type Props = {
   offers: Offer[];
@@ -19,20 +19,21 @@ type Props = {
 
 export default function Property({ offers }: Props) {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const offer = offers.find((el) => el.id === Number(id));
   const nearestPlaces = useSelector(getCityOffers);
   const comments = useSelector(getComments);
 
-  let neighbourhood;
+  const neighbourhoodId = useRef('');
 
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
   useEffect(() => {
     if (offer) {
-      store.dispatch(fetchCommentsAction(id as string));
-      neighbourhood = fetchNeighbourhood(id as string);
+      dispatch(fetchCommentsAction(offer.id.toString()));
+      neighbourhoodId.current = fetchNeighbourhood(offer.id.toString());
     }
-  }, [offer, id]);
+  }, [offer]);
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
