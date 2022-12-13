@@ -1,6 +1,8 @@
+import { MAX_COUNT_OF_REVIEWS } from './../const/const';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Comment } from '../types/types';
+import { sortComments } from '../utils';
 
 export interface State {
   comments: Comment[];
@@ -15,7 +17,8 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {
     setComments: (state: State, action: PayloadAction<Comment[]>) => {
-      state.comments = action.payload;
+      const sortedCommentsByDate = sortComments(action.payload);
+      state.comments = sortedCommentsByDate.length > MAX_COUNT_OF_REVIEWS ? sortedCommentsByDate.slice(0, MAX_COUNT_OF_REVIEWS) : sortedCommentsByDate;
     },
   },
 });

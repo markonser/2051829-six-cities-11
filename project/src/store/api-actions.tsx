@@ -2,11 +2,12 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthData, Comment, CommentData, Offer, OfferStatusData, UserData } from '../types/types';
 import { AppDispatch, RootState } from './index';
-import { APIRoute, OfferId } from '../const/const';
+import { APIRoute, AuthorizationStatus, OfferId } from '../const/const';
 import { setNearbyOffers, setOffers } from './offers-slice';
 import { setComments } from './comments-slice';
 import { dropToken, saveToken } from '../services/token';
-import { setUserData } from './user-slice';
+import { setAuthStatus, setUserData } from './user-slice';
+import { redirectToRoute } from './action';
 
 type settingsType = {
   dispatch: AppDispatch;
@@ -23,7 +24,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, settingsTy
   },
 );
 
-export const fetchCommentsAction = createAsyncThunk<Comment[], string, settingsType>(
+export const fetchCommentsAction = createAsyncThunk<Comment[], number, settingsType>(
   'data/fetchComments',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<Comment[]>(`${APIRoute.Reviews}/${id}`);
@@ -45,6 +46,8 @@ export const loginAction = createAsyncThunk<void, AuthData, settingsType>(
     const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(data.token);
     dispatch(setUserData(data));
+    dispatch(redirectToRoute(APIRoute.Offers));
+    dispatch(setAuthStatus(AuthorizationStatus.Auth));
   },
 );
 
@@ -54,6 +57,7 @@ export const logoutAction = createAsyncThunk<void, undefined, settingsType>(
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(setUserData(undefined));
+    dispatch(setAuthStatus(AuthorizationStatus.NoAuth));
   },
 );
 
@@ -98,7 +102,7 @@ export const deleteFavoriteOfferAction = createAsyncThunk<Offer, OfferId, settin
   }
 );
 
-export const fetchNearbyOffers = createAsyncThunk<Offer[], string, settingsType>(
+export const fetchNearbyOffersAction = createAsyncThunk<Offer[], number, settingsType>(
   'data/fetchNearbyOffers',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);

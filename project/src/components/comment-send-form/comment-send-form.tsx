@@ -1,12 +1,10 @@
 import { FormEvent, Fragment, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { APIRoute } from '../../const/const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { APIRoute, MAX_LENGTH_OF_REVIEW, MIN_LENGTH_OF_REVIEW } from '../../const/const';
+import { useAppDispatch } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 
 const commentRating = [5, 4, 3, 2, 1];
-const commentMinLength = 50;
-const commentMaxLength = 300;
 const emptyFormState = {
   rating: '',
   comment: '',
@@ -20,7 +18,6 @@ export default function CommentSendForm(): JSX.Element {
   const [formData, setFormData] = useState(emptyFormState);
 
   if (!id) {
-    // history.pushState(`${APIRoute.Offers}`)
     navigate(`${APIRoute.Offers}`);
   }
 
@@ -44,10 +41,10 @@ export default function CommentSendForm(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review </label>
       <div className="reviews__rating-form form__rating">
         {
-          commentRating.reverse().map((rating) => (
+          commentRating.map((rating) => (
             <Fragment key={rating}>
-              <input className="form__rating-input visually-hidden" name="rating" value={rating} id={`${rating}-stars"`} type="radio" onChange={fieldChangeHandle} maxLength={commentMaxLength} minLength={commentMinLength} />
-              <label htmlFor={`${rating}-stars"`} className="reviews__rating-label form__rating-label" title="perfect">
+              <input className="form__rating-input visually-hidden" name="rating" value={rating} id={`${rating}-stars"`} type="radio" onChange={fieldChangeHandle} />
+              <label htmlFor={`${rating}-stars"`} className="reviews__rating-label form__rating-label" title={`${rating}-stars`}>
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star" />
                 </svg>
@@ -56,7 +53,7 @@ export default function CommentSendForm(): JSX.Element {
           ))
         }
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" onChange={fieldChangeHandle}>
+      <textarea className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" value={formData.comment} onChange={fieldChangeHandle} maxLength={MAX_LENGTH_OF_REVIEW} minLength={MIN_LENGTH_OF_REVIEW}>
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -69,8 +66,8 @@ export default function CommentSendForm(): JSX.Element {
           type="submit"
           disabled={
             formData.rating === ''
-            || formData.comment.length < commentMinLength
-            || formData.comment.length > commentMaxLength
+            || formData.comment.length < MIN_LENGTH_OF_REVIEW
+            || formData.comment.length > MAX_LENGTH_OF_REVIEW
           }
         >Submit
         </button>

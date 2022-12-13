@@ -7,6 +7,7 @@ type Props = {
 
 export default function RewiewItem({ comment }: Props): JSX.Element {
   const date = dayjs(comment.date).format('MMMM DD');
+
   return (
     <li className='reviews__item'>
       <div className='reviews__user user'>

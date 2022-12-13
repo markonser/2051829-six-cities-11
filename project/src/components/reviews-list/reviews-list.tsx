@@ -1,13 +1,14 @@
 import { Comment } from '../../types/types';
-import RewiewItem from '../rewiew-item/rewiew-item';
-import CommentSendForm from '../../components/comment-send-form/comment-send-form';
+import ReviewItem from '../rewiew-item/rewiew-item';
 
 type Props = {
   comments: Comment[];
 }
 
-export default function RewiewsList({ comments }: Props): JSX.Element {
-
+export default function ReviewsList({ comments }: Props): JSX.Element {
+  if (comments.length === 0) {
+    return <p>Nothing yet commented.</p>;
+  }
   return (
     <section className='property__reviews reviews'>
       <div>
@@ -15,13 +16,12 @@ export default function RewiewsList({ comments }: Props): JSX.Element {
 
         <ul className='reviews__list'>
           {comments.map((comment) => (
-            <RewiewItem
+            <ReviewItem
               comment={comment} key={comment.id}
             />
           ))}
         </ul >
       </div>
-      <CommentSendForm />
     </section>
   );
 }

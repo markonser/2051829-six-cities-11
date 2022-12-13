@@ -5,7 +5,7 @@ import { cityNames, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const/c
 import { Offer } from '../../types/types';
 import useMap from '../../hooks/use-map/use-map';
 import { getSelectedCity } from '../../store/selectors';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 
 type MapProps = {
   offers: Offer[];
@@ -31,7 +31,7 @@ function Map({ offers, currentOffer, selectedPoint, elementSelector }: MapProps)
   const markersRef = useRef<Marker[]>([]);
   const map = useMap(mapRef, offers);
 
-  const selectedCity = useSelector(getSelectedCity);
+  const selectedCity = useAppSelector(getSelectedCity);
 
   useEffect(() => {
     if (map) {

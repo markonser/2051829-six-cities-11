@@ -1,4 +1,4 @@
-import { checkAuthAction, checkAuthAction as loginAction } from './api-actions';
+import { checkAuthAction as loginAction } from './api-actions';
 import { AuthorizationStatus } from './../const/const';
 import { UserData } from './../types/types';
 import { createSlice } from '@reduxjs/toolkit';
@@ -22,6 +22,9 @@ export const userSlice = createSlice({
   reducers: {
     setUserData: (state: State, action: PayloadAction<UserData | undefined>) => {
       state.userData = action.payload;
+    },
+    setAuthStatus: (state: State, action: PayloadAction<AuthorizationStatus>) => {
+      state.authorizationStatus = action.payload;
     },
   },
   extraReducers(builder) {
@@ -48,5 +51,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, setAuthStatus } = userSlice.actions;
 export default userSlice.reducer;

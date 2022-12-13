@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/const';
 import './page-not-found.css';
 
 export default function PageNotFound(){
@@ -22,7 +23,7 @@ export default function PageNotFound(){
                 <p>запрашиваемая страница не существует</p>
 
               </div>
-              <Link to='/' ><span className="link_404">Перейти на главную страницу</span></Link>
+              <Link to={AppRoute.Main} ><span className="link_404">Перейти на главную страницу</span></Link>
             </div>
           </div>
         </div>

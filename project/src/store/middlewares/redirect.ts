@@ -3,9 +3,6 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import browserHistory from '../../browser-history';
 import { Middleware } from 'redux';
 
-
-// type Reducer = ReturnType<typeof RootState>;
-
 export const redirect: Middleware<unknown, RootState> =
   (_store) =>
     (next) =>
