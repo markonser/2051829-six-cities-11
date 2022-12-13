@@ -80,9 +80,20 @@ export type Comment = {
   user: User;
 }
 
+export type CommentData = {
+  comment: string;
+  id: string;
+  rating: string;
+}
+
 export type cityNamesType = Record<string, {
   name: string;
   latitude: number;
   longitude: number;
   zoom: number;
 }>
+
+export type OfferStatusData = {
+  status: number;
+  id: number;
+}

@@ -1,17 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Offer } from '../../types/types';
 import Header from '../../components/header/header';
 import RewiewsList from '../../components/reviews-list/reviews-list';
 import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
-import { useState } from 'react';
 import Card from '../../components/card/card';
-import { useSelector } from 'react-redux';
-import { getCityOffers, getComments } from '../../store/selectors';
-import { fetchCommentsAction } from '../../store/api-actions';
-import { fetchNeighbourhood } from '../../services/utils';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { getComments, getNearbyOffers } from '../../store/selectors';
+import { fetchCommentsAction, fetchNearbyOffers } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 
 type Props = {
   offers: Offer[];
@@ -21,26 +18,18 @@ export default function Property({ offers }: Props) {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const offer = offers.find((el) => el.id === Number(id));
-  const nearestPlaces = useSelector(getCityOffers);
-  const comments = useSelector(getComments);
-
-  const neighbourhoodId = useRef('');
-
-  const [activeOffer, setActiveOffer] = useState<number | undefined>();
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const comments = useAppSelector(getComments);
+  
 
   useEffect(() => {
     if (offer) {
-      dispatch(fetchCommentsAction(offer.id.toString()));
-      neighbourhoodId.current = fetchNeighbourhood(offer.id.toString());
+      const offerId = offer.id.toString();
+      dispatch(fetchCommentsAction(offerId));
+      dispatch(fetchNearbyOffers(offerId));
     }
-  }, [offer]);
+  }, [offer,dispatch]);
 
-  const handleMouseEnter = (offerId: number) => {
-    setActiveOffer(offerId);
-  };
-  const handleMouseLeave = () => {
-    setActiveOffer(undefined);
-  };
   if (!offer) {
     return <div>Данные не загружены</div>;
   }
@@ -147,8 +136,8 @@ export default function Property({ offers }: Props) {
           </div>
         </section>
         <Map
-          offers={nearestPlaces}
-          selectedPoint={activeOffer}
+          offers={nearbyOffers}
+          currentOffer={offer}
           elementSelector={'property__map map'}
         />
       </main>
@@ -157,12 +146,10 @@ export default function Property({ offers }: Props) {
           <h2 className='near-places__title'>Other places in the neighbourhood</h2>
           <div className='near-places__list places__list'>
             {
-              nearestPlaces.map((item) => (
+              nearbyOffers.map((item) => (
                 <Card
                   key={item.id}
                   offer={item}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
                 />
               ))
             }

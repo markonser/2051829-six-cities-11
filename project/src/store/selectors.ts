@@ -3,7 +3,11 @@ import { RootState } from './index';
 
 export const getOffers = (state: RootState) => state.offers.offers;
 export const getComments = (state: RootState) => state.comments.comments;
-export const getOffersLoading = (state: RootState) => state.offers.loading;
+export const getNearbyOffers = (state: RootState) => state.offers.nearbyOffers;
+export const getOffersLoading = (state: RootState) => state.offers.isLoadingOffers;
+export const getAuthorizationStatus = (state: RootState) => state.user.authorizationStatus;
+export const getUserData = (state: RootState) => state.user.userData;
+export const getFavoriteOffers = (state: RootState) => state.offers.favoriteOffers;
 
 export const getCityOffers = (state: RootState) => {
   const cityName = cityNames[state.offers.selectedCity].name;

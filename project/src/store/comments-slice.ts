@@ -10,7 +10,7 @@ const initialState: State = {
   comments: [],
 };
 
-export const comments = createSlice({
+export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
@@ -20,5 +20,5 @@ export const comments = createSlice({
   },
 });
 
-export const { setComments } = comments.actions;
-export default comments.reducer;
+export const { setComments } = commentsSlice.actions;
+export default commentsSlice.reducer;

@@ -9,7 +9,7 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sorting from '../../components/sorting/sorting';
 import { SortType } from '../../const/const';
-import { setOffers } from '../../store/offers';
+import { setOffers } from '../../store/offers-slice';
 import { getSelectedCity, getOffersLoading, getCityOffers } from '../../store/selectors';
 
 

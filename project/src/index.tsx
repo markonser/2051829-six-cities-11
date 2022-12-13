@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { store } from './store';
-import { checkAuthAction, fetchOfferAction } from './store/api-actions';
+import { checkAuthAction, fetchOffersAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-store.dispatch(fetchOfferAction());
+store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
 root.render(
