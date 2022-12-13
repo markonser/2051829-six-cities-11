@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CityName, cityNames } from '../../const/const';
-import { changeCity } from '../../store/offers';
+import { useAppSelector } from '../../hooks';
+import { changeCity } from '../../store/offers-slice';
+import { getSelectedCity } from '../../store/selectors';
 
-export default function CitiesNav(): JSX.Element {
 
+export default function HeaderNav(): JSX.Element {
   const dispatch = useDispatch();
-  const [active, setActive] = useState('paris');
+  const selectedCity = useAppSelector(getSelectedCity);
+  const [active, setActive] = useState(selectedCity);
   const cityNamesList = useMemo(() => Object.values(cityNames).map((city) => city.name), []);
 
   const changeCityHandler = (evt: React.MouseEvent<HTMLElement>, cityName: CityName) => {
@@ -22,7 +25,7 @@ export default function CitiesNav(): JSX.Element {
         <section className='locations container'>
           <ul className='locations__list tabs__list' >
             {
-              cityNamesList.map((cityName:CityName) => {
+              cityNamesList.map((cityName: CityName) => {
                 const isActive = (cityName === active);
                 return (
                   <li className='locations__item' key={Math.random()} onClick={(evt) => changeCityHandler(evt, cityName)} >

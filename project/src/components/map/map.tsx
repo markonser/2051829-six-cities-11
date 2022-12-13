@@ -1,15 +1,16 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { cityNames, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const/const';
 import { Offer } from '../../types/types';
 import useMap from '../../hooks/use-map/use-map';
 import { getSelectedCity } from '../../store/selectors';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 
 type MapProps = {
   offers: Offer[];
-  selectedPoint: number | undefined;
+  currentOffer?: Offer;
+  selectedPoint?: number | undefined;
   elementSelector: string;
 };
 
@@ -25,12 +26,12 @@ const currentCustomIcon = new Icon({
   iconAnchor: [14, 40]
 });
 
-function Map({ offers, selectedPoint, elementSelector }: MapProps): JSX.Element {
+function Map({ offers, currentOffer, selectedPoint, elementSelector }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const markersRef = useRef<Marker[]>([]);
   const map = useMap(mapRef, offers);
 
-  const selectedCity = useSelector(getSelectedCity);
+  const selectedCity = useAppSelector(getSelectedCity);
 
   useEffect(() => {
     if (map) {
@@ -56,10 +57,22 @@ function Map({ offers, selectedPoint, elementSelector }: MapProps): JSX.Element 
           .addTo(map);
         markersRef.current.push(marker);
       });
+
+      if (currentOffer) {
+        const marker = new Marker({
+          lat: currentOffer.location.latitude,
+          lng: currentOffer.location.longitude,
+        });
+
+        marker
+          .setIcon(currentCustomIcon)
+          .addTo(map);
+        markersRef.current.push(marker);
+      }
     }
-  }, [map, offers, selectedPoint, selectedCity]);
+  }, [map, offers, selectedPoint, selectedCity, currentOffer]);
 
   return <section className={elementSelector} ref={mapRef}></section>;
 }
 
-export default Map;
+export default memo(Map);

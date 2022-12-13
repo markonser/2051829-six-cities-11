@@ -14,11 +14,26 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
 export const URL_MARKER_DEFAULT =
   '/img/pin.svg';
 
 export const URL_MARKER_CURRENT =
   '/img/pin-active.svg';
+
+export enum CitiesList {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
 
 export type cityNamesType = Record<string, {
   name: string;
@@ -78,3 +93,13 @@ export enum SortType {
 export const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const passRegExp = /^(?=.*\d)(?=.*[A-Za-zА-Яа-яЁё])([^\s]){2,}$/;
+export const MIN_LENGTH_OF_PASSWORD = 1;
+
+export const TIMEOUT_SHOW_ERROR = 3000;
+
+export const MIN_LENGTH_OF_REVIEW = 50;
+export const MAX_LENGTH_OF_REVIEW = 300;
+
+export const MAX_COUNT_OF_REVIEWS = 10;
+
+export type OfferId = number;

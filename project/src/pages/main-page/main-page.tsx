@@ -1,23 +1,25 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import Card from '../../components/card/card';
-import CitiesNav from '../../components/cities-nav/cities-nav';
+import HeaderNav from '../../components/header-nav/header-nav';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sorting from '../../components/sorting/sorting';
-import { SortType } from '../../const/const';
-import { setOffers } from '../../store/offers';
-import { getSelectedCity, getOffersLoading, getCityOffers } from '../../store/selectors';
+import { AuthorizationStatus, SortType } from '../../const/const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoriteOffersAction, fetchOffersAction } from '../../store/api-actions';
+import { setOffers } from '../../store/offers-slice';
+import { getSelectedCity, getOffersLoading, getCityOffers, getAuthorizationStatus } from '../../store/selectors';
+
 
 export default function MainPage() {
-  const cityOffers = useSelector(getCityOffers);
-  const selectedCity = useSelector(getSelectedCity);
-  const loading = useSelector(getOffersLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const cityOffers = useAppSelector(getCityOffers);
+  const selectedCity = useAppSelector(getSelectedCity);
+  const loading = useAppSelector(getOffersLoading);
   const [activeOffer, setActiveOffer] = useState<number | undefined>();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
@@ -25,6 +27,14 @@ export default function MainPage() {
   const handleMouseLeave = () => {
     setActiveOffer(undefined);
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+    dispatch(fetchOffersAction());
+  }, [dispatch, authorizationStatus]
+  );
 
   const sortOffers = (sortBy: keyof typeof SortType): void => {
     let sortedOffersBySortType;
@@ -55,7 +65,7 @@ export default function MainPage() {
       </Helmet>
       <main className='page__main page__main--index'>
 
-        <CitiesNav />
+        <HeaderNav />
 
         <div className='cities'>
           <div className='cities__places-container container'>

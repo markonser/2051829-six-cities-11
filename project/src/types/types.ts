@@ -17,26 +17,6 @@ export type OfferLocation = {
   };
 }
 
-export type User = {
-  avatarUrl: string;
-  id: number;
-  isPro: boolean;
-  name: string;
-}
-
-export type Comment = {
-  comment: string;
-  date: string;
-  id: number;
-  rating: number;
-  user: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-  };
-}
-
 export type Offer = {
   bedrooms: number;
   city: {
@@ -70,4 +50,50 @@ export type Offer = {
   rating: number;
   title: string;
   type: string;
+}
+export type AuthData = {
+  email: string;
+  password: string;
+}
+
+export type UserData = {
+  avatarUrl: string;
+  email: string;
+  id: number;
+  isPro: boolean;
+  name: string;
+  token: string;
+}
+
+export type User = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
+  name: string;
+}
+
+export type Comment = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: User;
+}
+
+export type CommentData = {
+  comment: string;
+  id: string;
+  rating: string;
+}
+
+export type cityNamesType = Record<string, {
+  name: string;
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}>
+
+export type OfferStatusData = {
+  status: number;
+  id: number;
 }

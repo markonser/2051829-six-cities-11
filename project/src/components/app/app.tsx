@@ -1,49 +1,56 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
-import Favorites from '../../pages/favorites-page/favorites-page';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import Login from '../../pages/login-page/login-page';
-import PrivateRoute from '../private-route/private-route';
 import Property from '../../pages/property-page/property-page';
 import ScrollToTop from '../../hooks/scroll-to-top/scroll-to-top';
 import { AppRoute } from '../../const/const';
 import { HelmetProvider } from 'react-helmet-async';
-import { useSelector } from 'react-redux';
-import { getOffers } from '../../store/selectors';
+import { getAuthorizationStatus } from '../../store/selectors';
+import LoginPrivateRoute from '../login-private-route/login-private-route';
+import FavoritePrivateRoute from '../favorite-private-route/favorite-private-route';
+import { useAppSelector } from '../../hooks';
+import { HistoryRouter } from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 function App() {
-  const offers = useSelector(getOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop />
         <Routes>
           <Route path={AppRoute.Main} element={
             <MainPage />
           }
           />
-          <Route path={AppRoute.Login} element={<Login />} />
+          <Route
+            path={AppRoute.Login}
+            element={
+              <LoginPrivateRoute authorizationStatus={authorizationStatus}>
+                <Login />
+              </LoginPrivateRoute>
+            }
+          />
           <Route
             path={AppRoute.Room}
             element={
-              <Property
-                offers={offers}
-                comments={[]}
-              />
+              <Property />
             }
           />
-          <Route path={AppRoute.Favorites} element={
-            <PrivateRoute>
-              <Favorites
-                offers={offers}
-              />
-            </PrivateRoute>
-          }
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <FavoritePrivateRoute authorizationStatus={authorizationStatus}>
+                <FavoritesPage />
+              </FavoritePrivateRoute>
+            }
           />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
