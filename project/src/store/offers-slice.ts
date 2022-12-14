@@ -2,7 +2,7 @@ import { CityName } from '../const/const';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Offer } from '../types/types';
-import { fetchNearbyOffersAction, fetchOffersAction, fetchFavoriteOffersAction, setOfferStatusAction, fetchOfferInfo } from './api-actions';
+import { fetchNearbyOffersAction, fetchOffersAction, fetchFavoriteOffersAction, setOfferStatusAction, fetchOfferInfoAction } from './api-actions';
 
 export interface State {
   selectedCity: CityName;
@@ -103,13 +103,13 @@ export const offersSlice = createSlice({
         }
       })
       // current offer
-      .addCase(fetchOfferInfo.pending, (state) => {
+      .addCase(fetchOfferInfoAction.pending, (state) => {
         state.currentOfferLoadError = false;
       })
-      .addCase(fetchOfferInfo.fulfilled, (state, action) => {
+      .addCase(fetchOfferInfoAction.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
       })
-      .addCase(fetchOfferInfo.rejected, (state) => {
+      .addCase(fetchOfferInfoAction.rejected, (state) => {
         state.currentOfferLoadError = true;
       });
   },

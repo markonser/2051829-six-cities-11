@@ -85,7 +85,7 @@ export const setOfferStatusAction = createAsyncThunk<Offer, OfferStatusData, set
   },
 );
 
-export const fetchOfferInfo = createAsyncThunk<Offer, number, settingsType>(
+export const fetchOfferInfoAction = createAsyncThunk<Offer, number, settingsType>(
   'data/loadOffer',
   async (id, {extra: api}) => {
     const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);

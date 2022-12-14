@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { AppRoute } from '../../const/const';
 
-
 export default function FavoritesEmpty() {
   return (
     <div className='page page--favorites-empty'>

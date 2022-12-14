@@ -13,24 +13,18 @@ export default function Login() {
   const authStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   const [isPasswordValidate, setPasswordValidate] = useState(false);
+  const city = useMemo(() => getRandomEnumValue(CitiesList), []);
   const emptyFormState = {
     email: '',
     password: '',
   };
-  const [formData, setFormData] = useState(emptyFormState);
 
-  const city = useMemo(() => getRandomEnumValue(CitiesList), []);
+  const [formData, setFormData] = useState(emptyFormState);
 
   const fieldChangeHandle = (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  useEffect(() => {
-    if (authStatus === AuthorizationStatus.Auth) {
-      navigate(AppRoute.Main);
-    }
-  }, [authStatus, navigate]);
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,6 +41,12 @@ export default function Login() {
       );
     }
   };
+
+  useEffect(() => {
+    if (authStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Main);
+    }
+  }, [authStatus, navigate]);
 
   return (
 
@@ -86,6 +86,5 @@ export default function Login() {
         </div>
       </main>
     </div>
-
   );
 }

@@ -1,3 +1,6 @@
+export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+export const BACKEND_URL = 'https://11.react.pages.academy/six-cities';
+export const REQUEST_TIMEOUT = 5000;
 export const EMAIL_REG_EXP = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const PASSWORD_REG_EXP = /^(?=.*\d)(?=.*[A-Za-zА-Яа-яЁё])([^\s]){2,}$/;
 export const MIN_LENGTH_OF_PASSWORD = 1;

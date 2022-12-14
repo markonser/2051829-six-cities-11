@@ -58,7 +58,6 @@ export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
       }));
     } else {
       dispatch(redirectToRoute(ApiRoute.Login));
-      // <Navigate to ={APIRoute.Login} />;
     }
   };
 

@@ -9,7 +9,7 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { redirectToRoute } from '../../store/action';
-import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferInfo, setOfferStatusAction } from '../../store/api-actions';
+import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferInfoAction, setOfferStatusAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getComments, getCurrentOffer, getCurrentOfferLoadError, getNearbyOffers } from '../../store/selectors';
 
 function Property(): JSX.Element {
@@ -25,7 +25,7 @@ function Property(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchNearbyOffersAction(offerId));
-    dispatch(fetchOfferInfo(offerId));
+    dispatch(fetchOfferInfoAction(offerId));
     dispatch(fetchCommentsAction(offerId));
   }, [dispatch, offerId]);
 
