@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Offer } from '../../types/types';
-import { APIRoute, AppRoute, AuthorizationStatus } from '../../const/const';
+import { ApiRoute, AppRoute, AuthorizationStatus } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/selectors';
 import { setOfferStatusAction } from '../../store/api-actions';
@@ -57,7 +57,7 @@ export default function Card({ offer, onMouseEnter, onMouseLeave }: Props) {
         id: offerId,
       }));
     } else {
-      dispatch(redirectToRoute(APIRoute.Login));
+      dispatch(redirectToRoute(ApiRoute.Login));
       // <Navigate to ={APIRoute.Login} />;
     }
   };

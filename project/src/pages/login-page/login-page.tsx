@@ -1,9 +1,8 @@
 import { FormEvent, useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
-import { APIRoute, AppRoute, AuthorizationStatus, CitiesList, emailRegExp, MIN_LENGTH_OF_PASSWORD, TIMEOUT_SHOW_ERROR } from '../../const/const';
+import { AppRoute, AuthorizationStatus, CitiesList, EMAIL_REG_EXP, MIN_LENGTH_OF_PASSWORD, TIMEOUT_SHOW_ERROR } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { redirectToRoute } from '../../store/action';
 import { loginAction } from '../../store/api-actions';
 import { changeCity } from '../../store/offers-slice';
 import { getAuthorizationStatus } from '../../store/selectors';
@@ -29,7 +28,7 @@ export default function Login() {
 
   useEffect(() => {
     if (authStatus === AuthorizationStatus.Auth) {
-      navigate(APIRoute.Offers);
+      navigate(AppRoute.Main);
     }
   }, [authStatus, navigate]);
 
@@ -37,7 +36,7 @@ export default function Login() {
     event.preventDefault();
     setPasswordValidate(false);
 
-    if (formData.password.length > MIN_LENGTH_OF_PASSWORD && emailRegExp.test(formData.email)) {
+    if (formData.password.length > MIN_LENGTH_OF_PASSWORD && EMAIL_REG_EXP.test(formData.email)) {
       dispatch(loginAction({ email: formData.email, password: formData.password }));
       setFormData(emptyFormState);
     } else {
@@ -46,10 +45,6 @@ export default function Login() {
         () => (setPasswordValidate(false)),
         TIMEOUT_SHOW_ERROR,
       );
-    }
-
-    if (AuthorizationStatus.Auth) {
-      dispatch(redirectToRoute(APIRoute.Offers));
     }
   };
 

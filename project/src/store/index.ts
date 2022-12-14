@@ -1,3 +1,4 @@
+import { redirect } from './middlewares/redirect';
 import { createAPI } from './../services/api';
 import { configureStore } from '@reduxjs/toolkit';
 import offersSlice from './offers-slice';
@@ -17,7 +18,7 @@ export const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }),
+    }).concat(redirect),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

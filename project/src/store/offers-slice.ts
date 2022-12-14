@@ -15,6 +15,7 @@ export interface State {
   favoriteOffers: Offer[];
   currentOffer: null | Offer;
   favoriteOffersLoadError: boolean;
+  currentOfferLoadError: boolean;
 }
 
 const initialState: State = {
@@ -28,6 +29,7 @@ const initialState: State = {
   favoriteOffers: [],
   currentOffer: null,
   favoriteOffersLoadError: false,
+  currentOfferLoadError: false,
 };
 
 export const offersSlice = createSlice({
@@ -102,13 +104,13 @@ export const offersSlice = createSlice({
       })
       // current offer
       .addCase(fetchOfferInfo.pending, (state) => {
-        state.favoriteOffersLoadError = false;
+        state.currentOfferLoadError = false;
       })
       .addCase(fetchOfferInfo.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
       })
       .addCase(fetchOfferInfo.rejected, (state) => {
-        state.favoriteOffersLoadError = true;
+        state.currentOfferLoadError = true;
       });
   },
 });
