@@ -7,13 +7,6 @@ import useMap from '../../hooks/use-map/use-map';
 import { getSelectedCity } from '../../store/selectors';
 import { useAppSelector } from '../../hooks';
 
-type MapProps = {
-  offers: Offer[];
-  currentOffer?: Offer;
-  selectedPoint?: number | undefined;
-  elementSelector: string;
-};
-
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [28, 40],
@@ -26,11 +19,17 @@ const currentCustomIcon = new Icon({
   iconAnchor: [14, 40]
 });
 
+type MapProps = {
+  offers: Offer[];
+  currentOffer?: Offer;
+  selectedPoint?: number | undefined;
+  elementSelector: string;
+};
+
 function Map({ offers, currentOffer, selectedPoint, elementSelector }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const markersRef = useRef<Marker[]>([]);
   const map = useMap(mapRef, offers);
-
   const selectedCity = useAppSelector(getSelectedCity);
 
   useEffect(() => {

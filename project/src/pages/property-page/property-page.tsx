@@ -1,31 +1,39 @@
 import { useEffect, FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Card from '../../components/card/card';
 import CommentSendForm from '../../components/comment-send-form/comment-send-form';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { APIRoute, AuthorizationStatus } from '../../const/const';
+import { ApiRoute, AppRoute, AuthorizationStatus } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { redirectToRoute } from '../../store/action';
-import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferInfo, setOfferStatusAction } from '../../store/api-actions';
-import { getAuthorizationStatus, getComments, getCurrentOffer, getNearbyOffers } from '../../store/selectors';
+import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferInfoAction, setOfferStatusAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getComments, getCurrentOffer, getCurrentOfferLoadError, getNearbyOffers } from '../../store/selectors';
 
 function Property(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
   const offerId = Number(params.id);
+  const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentOffer = useAppSelector(getCurrentOffer);
+  const currentOfferLoadError = useAppSelector(getCurrentOfferLoadError);
   const reviewsOfCurrentOffer = useAppSelector(getComments);
   const nearOffers = useAppSelector(getNearbyOffers);
 
   useEffect(() => {
     dispatch(fetchNearbyOffersAction(offerId));
-    dispatch(fetchOfferInfo(offerId));
+    dispatch(fetchOfferInfoAction(offerId));
     dispatch(fetchCommentsAction(offerId));
   }, [dispatch, offerId]);
+
+  useEffect(() => {
+    if (currentOfferLoadError) {
+      navigate(AppRoute.Main);
+    }
+  }, [currentOfferLoadError, navigate]);
 
   const handleFavoriteButtonClick = (evt: FormEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -42,7 +50,7 @@ function Property(): JSX.Element {
     }
 
     if (authorizationStatus !== AuthorizationStatus.Auth) {
-      dispatch(redirectToRoute(APIRoute.Login));
+      dispatch(redirectToRoute(ApiRoute.Login));
     }
   };
 

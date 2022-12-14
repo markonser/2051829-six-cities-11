@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthData, Comment, CommentData, Offer, OfferStatusData, UserData } from '../types/types';
 import { AppDispatch, RootState } from './index';
-import { APIRoute, AuthorizationStatus, OfferId } from '../const/const';
+import { ApiRoute, AuthorizationStatus, OfferId } from '../const/const';
 import { setNearbyOffers, setOffers } from './offers-slice';
 import { setComments } from './comments-slice';
 import { dropToken, saveToken } from '../services/token';
@@ -18,7 +18,7 @@ type settingsType = {
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, settingsType>(
   'data/fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<Offer[]>(APIRoute.Offers);
+    const { data } = await api.get<Offer[]>(ApiRoute.Offers);
     dispatch(setOffers(data));
     return data;
   },
@@ -27,7 +27,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, settingsTy
 export const fetchCommentsAction = createAsyncThunk<Comment[], number, settingsType>(
   'data/fetchComments',
   async (id, { dispatch, extra: api }) => {
-    const { data } = await api.get<Comment[]>(`${APIRoute.Reviews}/${id}`);
+    const { data } = await api.get<Comment[]>(`${ApiRoute.Reviews}/${id}`);
     dispatch(setComments(data));
     return data;
   },
@@ -35,7 +35,7 @@ export const fetchCommentsAction = createAsyncThunk<Comment[], number, settingsT
 
 export const checkAuthAction = createAsyncThunk<void, undefined, settingsType>(
   'user/checkAuth', async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<UserData>(APIRoute.Login);
+    const { data } = await api.get<UserData>(ApiRoute.Login);
     dispatch(setUserData(data));
   }
 );
@@ -43,10 +43,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, settingsType>(
 export const loginAction = createAsyncThunk<void, AuthData, settingsType>(
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
-    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+    const { data } = await api.post<UserData>(ApiRoute.Login, { email, password });
     saveToken(data.token);
     dispatch(setUserData(data));
-    dispatch(redirectToRoute(APIRoute.Offers));
+    dispatch(redirectToRoute(ApiRoute.Offers));
     dispatch(setAuthStatus(AuthorizationStatus.Auth));
   },
 );
@@ -54,7 +54,7 @@ export const loginAction = createAsyncThunk<void, AuthData, settingsType>(
 export const logoutAction = createAsyncThunk<void, undefined, settingsType>(
   'user/logout',
   async (_arg, { dispatch, extra: api }) => {
-    await api.delete(APIRoute.Logout);
+    await api.delete(ApiRoute.Logout);
     dropToken();
     dispatch(setUserData(undefined));
     dispatch(setAuthStatus(AuthorizationStatus.NoAuth));
@@ -64,7 +64,7 @@ export const logoutAction = createAsyncThunk<void, undefined, settingsType>(
 export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, settingsType>(
   'data/fetchFavoriteOffers',
   async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+    const { data } = await api.get<Offer[]>(ApiRoute.Favorite);
     return data;
   }
 );
@@ -72,7 +72,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, se
 export const setFavoriteOfferAction = createAsyncThunk<Offer, OfferId, settingsType>(
   'data/setFavoriteOffer',
   async (id, { dispatch, extra: api }) => {
-    const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/1`);
+    const { data } = await api.post<Offer>(`${ApiRoute.Favorite}/${id}/1`);
     return data;
   }
 );
@@ -80,16 +80,15 @@ export const setFavoriteOfferAction = createAsyncThunk<Offer, OfferId, settingsT
 export const setOfferStatusAction = createAsyncThunk<Offer, OfferStatusData, settingsType>(
   'data/setOfferStatusAction',
   async ({status, id}, {extra: api}) => {
-    const {data} = await api.post<Offer>(`${APIRoute.Favorite}/${id}/${status}`, {id, status});
+    const {data} = await api.post<Offer>(`${ApiRoute.Favorite}/${id}/${status}`, {id, status});
     return data;
   },
 );
 
-export const fetchOfferInfo = createAsyncThunk<Offer, number, settingsType>(
+export const fetchOfferInfoAction = createAsyncThunk<Offer, number, settingsType>(
   'data/loadOffer',
   async (id, {extra: api}) => {
-    const path = `${APIRoute.Offers}/${id}`;
-    const {data} = await api.get<Offer>(path);
+    const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
     return data;
   },
 );
@@ -97,7 +96,7 @@ export const fetchOfferInfo = createAsyncThunk<Offer, number, settingsType>(
 export const deleteFavoriteOfferAction = createAsyncThunk<Offer, OfferId, settingsType>(
   'data/deleteFavoriteOffer',
   async (id, { dispatch, extra: api }) => {
-    const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/0`);
+    const { data } = await api.post<Offer>(`${ApiRoute.Favorite}/${id}/0`);
     return data;
   }
 );
@@ -105,7 +104,7 @@ export const deleteFavoriteOfferAction = createAsyncThunk<Offer, OfferId, settin
 export const fetchNearbyOffersAction = createAsyncThunk<Offer[], number, settingsType>(
   'data/fetchNearbyOffers',
   async (id, { dispatch, extra: api }) => {
-    const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    const { data } = await api.get<Offer[]>(`${ApiRoute.Offers}/${id}/nearby`);
     dispatch(setNearbyOffers(data));
     return data;
   },
@@ -114,7 +113,8 @@ export const fetchNearbyOffersAction = createAsyncThunk<Offer[], number, setting
 export const addReviewAction = createAsyncThunk<Comment, CommentData, settingsType>(
   'data/postReview',
   async ({ id, comment, rating }, { dispatch, extra: api }) => {
-    const { data } = await api.post<Comment>(`${APIRoute.Reviews} / ${id}`, { comment, rating });
+    const { data } = await api.post<Comment>(`${ApiRoute.Reviews}/${id}`, { comment, rating });
+    dispatch(fetchCommentsAction(Number(id)));
     return data;
   },
 );

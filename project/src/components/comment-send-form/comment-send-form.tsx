@@ -1,6 +1,6 @@
 import { FormEvent, Fragment, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { APIRoute, MAX_LENGTH_OF_REVIEW, MIN_LENGTH_OF_REVIEW } from '../../const/const';
+import { ApiRoute, MAX_LENGTH_OF_REVIEW, MIN_LENGTH_OF_REVIEW } from '../../const/const';
 import { useAppDispatch } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 
@@ -18,7 +18,7 @@ export default function CommentSendForm(): JSX.Element {
   const [formData, setFormData] = useState(emptyFormState);
 
   if (!id) {
-    navigate(`${APIRoute.Offers}`);
+    navigate(`${ApiRoute.Offers}`);
   }
 
   const fieldChangeHandle = (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -43,7 +43,7 @@ export default function CommentSendForm(): JSX.Element {
         {
           commentRating.map((rating) => (
             <Fragment key={rating}>
-              <input className="form__rating-input visually-hidden" name="rating" value={rating} id={`${rating}-stars"`} type="radio" onChange={fieldChangeHandle} />
+              <input className="form__rating-input visually-hidden" name="rating" value={rating} id={`${rating}-stars"`} type="radio" checked={Number(formData.rating) === rating} onChange={fieldChangeHandle} />
               <label htmlFor={`${rating}-stars"`} className="reviews__rating-label form__rating-label" title={`${rating}-stars`}>
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star" />

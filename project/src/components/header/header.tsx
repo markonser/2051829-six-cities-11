@@ -8,7 +8,6 @@ function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userData = useAppSelector(getUserData);
   const favoriteOffers = useAppSelector(getFavoriteOffers);
-
   const dispatch = useAppDispatch();
 
   if (authorizationStatus === AuthorizationStatus.Auth) {

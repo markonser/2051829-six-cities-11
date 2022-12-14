@@ -18,8 +18,8 @@ export default function MainPage() {
   const cityOffers = useAppSelector(getCityOffers);
   const selectedCity = useAppSelector(getSelectedCity);
   const loading = useAppSelector(getOffersLoading);
-  const [activeOffer, setActiveOffer] = useState<number | undefined>();
   const dispatch = useAppDispatch();
+  const [activeOffer, setActiveOffer] = useState<number | undefined>();
 
   const handleMouseEnter = (offerId: number) => {
     setActiveOffer(offerId);
@@ -27,14 +27,6 @@ export default function MainPage() {
   const handleMouseLeave = () => {
     setActiveOffer(undefined);
   };
-
-  useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavoriteOffersAction());
-    }
-    dispatch(fetchOffersAction());
-  }, [dispatch, authorizationStatus]
-  );
 
   const sortOffers = (sortBy: keyof typeof SortType): void => {
     let sortedOffersBySortType;
@@ -56,6 +48,14 @@ export default function MainPage() {
     }
     dispatch(setOffers(sortedOffersBySortType));
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+    dispatch(fetchOffersAction());
+  }, [dispatch, authorizationStatus]
+  );
 
   return (
     <div className='page page--gray page--main' >
@@ -95,7 +95,6 @@ export default function MainPage() {
                 selectedPoint={activeOffer}
                 elementSelector={'cities__map map'}
               />
-
             </div>
           </div>
         </div>
@@ -103,4 +102,3 @@ export default function MainPage() {
     </div >
   );
 }
-

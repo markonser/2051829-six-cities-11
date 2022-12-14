@@ -9,6 +9,7 @@ export const getAuthorizationStatus = (state: RootState) => state.user.authoriza
 export const getUserData = (state: RootState) => state.user.userData;
 export const getFavoriteOffers = (state: RootState) => state.offers.favoriteOffers;
 export const getCurrentOffer = (state: RootState) => state.offers.currentOffer;
+export const getCurrentOfferLoadError = (state: RootState) => state.offers.currentOfferLoadError;
 export const getCityOffers = (state: RootState) => {
   const cityName = cityNames[state.offers.selectedCity].name;
   return state.offers.offers.filter((offer) => offer.city.name.toLowerCase() === cityName);

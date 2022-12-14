@@ -38,16 +38,6 @@ export const userSlice = createSlice({
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
-  // .addCase(checkAuthAction.pending, (state) => {
-  //   state.authorizationStatus = AuthorizationStatus.Unknown;
-  // })
-  // .addCase(checkAuthAction.fulfilled, (state, action) => {
-  //   state.userData = action.payload;
-  //   state.authorizationStatus = AuthorizationStatus.Auth;
-  // })
-  // .addCase(checkAuthAction.rejected, (state) => {
-  //   state.authorizationStatus = AuthorizationStatus.NoAuth;
-  // });
   },
 });
 

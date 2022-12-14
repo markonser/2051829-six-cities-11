@@ -1,3 +1,22 @@
+export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+export const BACKEND_URL = 'https://11.react.pages.academy/six-cities';
+export const REQUEST_TIMEOUT = 5000;
+export const EMAIL_REG_EXP = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const PASSWORD_REG_EXP = /^(?=.*\d)(?=.*[A-Za-zА-Яа-яЁё])([^\s]){2,}$/;
+export const MIN_LENGTH_OF_PASSWORD = 1;
+export const TIMEOUT_SHOW_ERROR = 3000;
+export const MIN_LENGTH_OF_REVIEW = 50;
+export const MAX_LENGTH_OF_REVIEW = 300;
+export const MAX_COUNT_OF_REVIEWS = 10;
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
+export const URL_MARKER_CURRENT = '/img/pin-active.svg';
+
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'PriceLowToHigh',
+  PriceHighToLow = 'PriceHighToLow',
+  RatingHighToLow = 'RatingHighToLow'
+}
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -6,7 +25,7 @@ export enum AppRoute {
   NotFound = '*'
 }
 
-export enum APIRoute {
+export enum ApiRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
@@ -19,12 +38,6 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-
-export const URL_MARKER_DEFAULT =
-  '/img/pin.svg';
-
-export const URL_MARKER_CURRENT =
-  '/img/pin-active.svg';
 
 export enum CitiesList {
   Paris = 'Paris',
@@ -82,24 +95,4 @@ export const cityNames: cityNamesType = {
 };
 
 export type CityName = keyof typeof cityNames;
-
-export enum SortType {
-  Popular = 'Popular',
-  PriceLowToHigh = 'PriceLowToHigh',
-  PriceHighToLow = 'PriceHighToLow',
-  RatingHighToLow = 'RatingHighToLow'
-}
-
-export const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-export const passRegExp = /^(?=.*\d)(?=.*[A-Za-zА-Яа-яЁё])([^\s]){2,}$/;
-export const MIN_LENGTH_OF_PASSWORD = 1;
-
-export const TIMEOUT_SHOW_ERROR = 3000;
-
-export const MIN_LENGTH_OF_REVIEW = 50;
-export const MAX_LENGTH_OF_REVIEW = 300;
-
-export const MAX_COUNT_OF_REVIEWS = 10;
-
 export type OfferId = number;

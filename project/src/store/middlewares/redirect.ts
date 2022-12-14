@@ -1,9 +1,8 @@
-import { RootState } from './../index';
 import { PayloadAction } from '@reduxjs/toolkit';
 import browserHistory from '../../browser-history';
 import { Middleware } from 'redux';
 
-export const redirect: Middleware<unknown, RootState> =
+export const redirect: Middleware<unknown> =
   (_store) =>
     (next) =>
       (action: PayloadAction<string>) => {

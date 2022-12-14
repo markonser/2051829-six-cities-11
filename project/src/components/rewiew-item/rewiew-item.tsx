@@ -33,4 +33,3 @@ export default function RewiewItem({ comment }: Props): JSX.Element {
     </li>
   );
 }
-
